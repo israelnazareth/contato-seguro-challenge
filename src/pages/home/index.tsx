@@ -1,6 +1,6 @@
 import Image from "next/image"
 import logo from '../../assets/logo.png';
-import { Plus } from "@phosphor-icons/react";
+import { PencilSimpleLine, Plus, Trash } from "@phosphor-icons/react";
 import { Container, Fields, Main, Table } from "./styles"
 import { useState } from "react";
 
@@ -45,6 +45,16 @@ export default function Home() {
                     <td>(12) 3456-7890</td>
                     <td>01/01/1990</td>
                     <td>Rio de Janeiro</td>
+                    <td>
+                      <button>
+                        <PencilSimpleLine size={32} color="#FFF" />
+                      </button>
+                    </td>
+                    <td>
+                      <button>
+                        <Trash size={32} color="#FFF" />
+                      </button>
+                    </td>
                   </tr>
                   <tr>
                     <td>Beltrano</td>
@@ -52,6 +62,16 @@ export default function Home() {
                     <td>(12) 3456-7890</td>
                     <td>01/01/1990</td>
                     <td>Rio de Janeiro</td>
+                    <td>
+                      <button>
+                        <PencilSimpleLine size={32} color="#FFF" />
+                      </button>
+                    </td>
+                    <td>
+                      <button>
+                        <Trash size={32} color="#FFF" />
+                      </button>
+                    </td>
                   </tr>
                   <tr>
                     <td>Cicrano</td>
@@ -59,6 +79,16 @@ export default function Home() {
                     <td>(12) 3456-7890</td>
                     <td>01/01/1990</td>
                     <td>Rio de Janeiro</td>
+                    <td>
+                      <button>
+                        <PencilSimpleLine size={32} color="#FFF" />
+                      </button>
+                    </td>
+                    <td>
+                      <button>
+                        <Trash size={32} color="#FFF" />
+                      </button>
+                    </td>
                   </tr>
                 </>
               ))}

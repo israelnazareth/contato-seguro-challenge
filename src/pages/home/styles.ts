@@ -57,6 +57,17 @@ export const Table = styled.table`
   th, td {
     border-top: 1px solid #DDD;
     text-align: left;
-    padding: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  td {
+    button {
+      display: flex;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #000;
+      padding: 2px;
+    }
   }
 `;
