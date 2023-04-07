@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :focus {
-    outline: none;
+    /* outline: none; */
   }
 
   body, html {

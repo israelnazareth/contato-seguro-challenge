@@ -1,10 +1,20 @@
+import React, { useState } from "react";
+import Modal from 'react-modal';
 import Image from "next/image"
 import logo from '../../assets/logo.png';
 import data from '../../data/data.json';
 import { PencilSimpleLine, Plus, Trash, X } from "@phosphor-icons/react";
-import { Container, Fields, ModalHeader, Main, Table, customModal, ModalForm, ModalFormButtons, PhoneAndBirthday } from "./styles"
-import React, { useEffect, useState } from "react";
-import Modal from 'react-modal';
+import {
+  Container,
+  Fields,
+  ModalHeader,
+  Main,
+  Table,
+  customModal,
+  ModalForm,
+  ModalFormButtons,
+  PhoneAndBirthday
+} from "./styles"
 
 interface ObjDataTypes {
   name: string,
@@ -27,7 +37,7 @@ export default function Home() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('name');
   const [contactObject, setContactObject] = useState(initialStateObj);
-  const [contactPosition, setContactPosition] = useState(0);
+  const [contactPosition, setContactPosition] = useState<number | null>(null);
 
   const filteredObj = inputValue.length > 0 ?
     data.filter(item => (
@@ -46,19 +56,25 @@ export default function Home() {
     setContactPosition(index);
   }
 
-  function handleEditInput(e: any) {
+  function handleEditContact(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
     const { name, value } = e.target;
-    setContactObject({ ...contactObject, [name]: value })
+    setContactObject(prevState => ({ ...prevState, [name]: value }))
   }
 
-  function handleClearFields(e: any) {
+  function handleClearFields(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setContactObject(initialStateObj)
   }
 
-  function handleSendConfirm(e: any) {
+  function handleSendConfirm(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    filteredObj[contactPosition] = contactObject;
+    if (contactPosition !== null) {
+      filteredObj[contactPosition] = contactObject;
+      setContactPosition(null);
+    } else {
+      filteredObj.push(contactObject)
+    }
     setIsOpen(false);
   }
 
@@ -98,7 +114,7 @@ export default function Home() {
                     min={3}
                     name="name"
                     value={contactObject.name}
-                    onChange={handleEditInput}
+                    onChange={handleEditContact}
                   />
                 </label>
                 <label htmlFor="email">
@@ -108,7 +124,7 @@ export default function Home() {
                     type="email"
                     name="email"
                     value={contactObject.email}
-                    onChange={handleEditInput}
+                    onChange={handleEditContact}
                   />
                 </label>
                 <PhoneAndBirthday>
@@ -119,7 +135,7 @@ export default function Home() {
                       type="tel"
                       name="phone"
                       value={contactObject.phone}
-                      onChange={handleEditInput}
+                      onChange={handleEditContact}
                     />
                   </label>
                   <label htmlFor="birthday">
@@ -129,7 +145,7 @@ export default function Home() {
                       type="text"
                       name="birthday"
                       value={contactObject.birthday}
-                      onChange={handleEditInput}
+                      onChange={handleEditContact}
                     />
                   </label>
                 </PhoneAndBirthday>
@@ -140,7 +156,7 @@ export default function Home() {
                     type="text"
                     name="city"
                     value={contactObject.city}
-                    onChange={handleEditInput}
+                    onChange={handleEditContact}
                   />
                 </label>
                 <ModalFormButtons>
