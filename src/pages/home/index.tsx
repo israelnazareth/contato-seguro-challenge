@@ -10,11 +10,14 @@ import {
   ModalHeader,
   Main,
   Table,
-  customModal,
   ModalForm,
   ModalFormButtons,
-  PhoneAndBirthday
+  PhoneAndBirthday,
+  modalStyle,
+  ModalConfirmButtons,
+  ModalConfirmContainer
 } from "./styles"
+import Head from "next/head";
 
 interface ObjDataTypes {
   name: string,
@@ -34,7 +37,8 @@ const initialStateObj: ObjDataTypes = {
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalContactIsOpen, setModalContactIsOpen] = useState(false);
+  const [modalConfirmIsOpen, setModalConfirmIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('name');
   const [contactObject, setContactObject] = useState(initialStateObj);
   const [contactPosition, setContactPosition] = useState<number | null>(null);
@@ -46,12 +50,13 @@ export default function Home() {
     ) : data
 
   function handleInsertNewContact() {
-    setIsOpen(true);
-    setContactObject(initialStateObj)
+    setModalContactIsOpen(true);
+    setContactObject(initialStateObj);
+    setContactPosition(null);
   }
 
   function handleEditButton(obj: ObjDataTypes, index: number) {
-    setIsOpen(true);
+    setModalContactIsOpen(true);
     setContactObject(obj);
     setContactPosition(index);
   }
@@ -75,17 +80,25 @@ export default function Home() {
     } else {
       filteredObj.push(contactObject)
     }
-    setIsOpen(false);
+    setModalContactIsOpen(false);
   }
 
   function handleRemoveContact(index: number) {
-    if (confirm("Tem certeza que deseja excluir este contato?")) {
-      filteredObj.splice(index, 1);
-    }
+    setModalConfirmIsOpen(true)
+    setContactPosition(index);
+  }
+
+  function handleConfirmDelete() {
+    filteredObj.splice(contactPosition!, 1)
+    setModalConfirmIsOpen(false)
+    setContactPosition(null);
   }
 
   return (
     <>
+      <Head>
+        <title>Contato Seguro - Canal de Ética</title>
+      </Head>
       <Main>
         <Container>
           <Image src={logo} alt='' />
@@ -93,15 +106,16 @@ export default function Home() {
             <button onClick={handleInsertNewContact}>
               <Plus color="#FFF" size={26} weight="bold" />
             </button>
+
             <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={() => setIsOpen(false)}
-              style={customModal}
+              isOpen={modalContactIsOpen}
+              onRequestClose={() => setModalContactIsOpen(false)}
+              style={modalStyle}
               ariaHideApp={false}
             >
               <ModalHeader>
                 <h2>Inserir</h2>
-                <button onClick={() => setIsOpen(false)}>
+                <button onClick={() => setModalContactIsOpen(false)}>
                   <X color="#EEE" size={30} weight="bold" />
                 </button>
               </ModalHeader>
@@ -187,6 +201,8 @@ export default function Home() {
                 <th>Telefone</th>
                 <th>Nascimento</th>
                 <th>Cidade</th>
+                <th>Editar</th>
+                <th>Excluir</th>
               </tr>
             </thead>
             <tbody>
@@ -199,16 +215,29 @@ export default function Home() {
                   <td>{obj.city}</td>
                   <td>
                     <button onClick={() => handleEditButton(obj, i)}>
-                      <PencilSimpleLine size={32} color="#FFF" />
+                      <PencilSimpleLine size={26} color="#FFF" />
                     </button>
                   </td>
                   <td>
                     <button onClick={() => handleRemoveContact(i)}>
-                      <Trash size={32} color="#FFF" />
+                      <Trash size={26} color="#FFF" />
                     </button>
                   </td>
                 </tr>
               ))}
+              <Modal
+                isOpen={modalConfirmIsOpen}
+                onRequestClose={() => setModalConfirmIsOpen(false)}
+                style={modalStyle}
+              >
+                <ModalConfirmContainer>
+                  <h2>Você deseja mesmo excluir este contato?</h2>
+                  <ModalConfirmButtons>
+                    <button onClick={handleConfirmDelete}>Sim</button>
+                    <button onClick={() => setModalConfirmIsOpen(false)}>Não</button>
+                  </ModalConfirmButtons>
+                </ModalConfirmContainer>
+              </Modal>
             </tbody>
           </Table>
         </Container>

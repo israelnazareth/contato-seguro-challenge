@@ -22,6 +22,7 @@ export const Container = styled.div`
   background-color: #EEE;
   padding: 1rem;
   border-radius: 8px;
+  min-width: 50rem;
 `;
 
 export const Fields = styled.div`
@@ -65,16 +66,19 @@ export const Table = styled.table`
   td {
     button {
       display: flex;
+      justify-content: center;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       background-color: #000;
-      padding: 2px;
+      width: 32px;
+      margin: auto;
+      padding: 0.125rem;
     }
   }
 `;
 
-export const customModal = {
+export const modalStyle = {
   content: {
     top: '50%',
     left: '50%',
@@ -85,7 +89,7 @@ export const customModal = {
     width: '35rem'
   },
   overlay: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   }
 };
 
@@ -149,5 +153,33 @@ export const ModalFormButtons = styled.div`
     color: #eee;
     border-radius: 4px;
     cursor: pointer;
+  }
+`;
+
+export const ModalConfirmContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
+
+export const ModalConfirmButtons = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  button {
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #000;
+    color: #FFF;
+    cursor: pointer;
+    font-weight: bold;
+    width: 8rem;
+    margin-top: 2rem;
+  }
+
+  button:first-child {
+    background-color: #F00;
   }
 `;
