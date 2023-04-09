@@ -1,11 +1,14 @@
 import type { AppProps } from 'next/app'
 import { GlobalStyle } from '../styles/globals'
+import { MyContextProvider } from '@/contexts/context'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <MyContextProvider>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </MyContextProvider>
     </>
   )
 }

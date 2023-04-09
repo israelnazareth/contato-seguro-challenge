@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import Modal from 'react-modal';
+import React from "react";
+import Head from "next/head";
 import Image from "next/image"
+import Modal from 'react-modal';
 import logo from '../../assets/logo.png';
 import data from '../../data/data.json';
+import { initialStateObj, useMyContext } from "@/contexts/context";
 import { PencilSimpleLine, Plus, Trash, X } from "@phosphor-icons/react";
 import {
   Container,
@@ -17,35 +19,20 @@ import {
   ModalConfirmButtons,
   ModalConfirmContainer
 } from "./styles"
-import Head from "next/head";
-
-interface ObjDataTypes {
-  name: string,
-  email: string,
-  phone: string,
-  birthday: string,
-  city: string
-}
-
-const initialStateObj: ObjDataTypes = {
-  name: '',
-  email: '',
-  birthday: '',
-  city: '',
-  phone: ''
-}
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('');
-  const [modalContactIsOpen, setModalContactIsOpen] = useState(false);
-  const [modalConfirmIsOpen, setModalConfirmIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('name');
-  const [contactObject, setContactObject] = useState(initialStateObj);
-  const [contactPosition, setContactPosition] = useState<number | null>(null);
+  const {
+    inputValue, setInputValue,
+    modalContactIsOpen, setModalContactIsOpen,
+    modalConfirmIsOpen, setModalConfirmIsOpen,
+    selectedOption, setSelectedOption,
+    contactObject, setContactObject,
+    contactPosition, setContactPosition
+  } = useMyContext()
 
   const filteredObj = inputValue.length > 0 ?
     data.filter(item => (
-      item[selectedOption as keyof ObjDataTypes].toLowerCase()
+      item[selectedOption as keyof typeof initialStateObj].toLowerCase()
         .includes(inputValue.toLowerCase()))
     ) : data
 
@@ -55,7 +42,7 @@ export default function Home() {
     setContactPosition(null);
   }
 
-  function handleEditButton(obj: ObjDataTypes, index: number) {
+  function handleEditButton(obj: typeof initialStateObj, index: number) {
     setModalContactIsOpen(true);
     setContactObject(obj);
     setContactPosition(index);
@@ -63,8 +50,8 @@ export default function Home() {
 
   function handleEditContact(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    const { name, value } = e.target;
-    setContactObject(prevState => ({ ...prevState, [name]: value }))
+    const { id, value } = e.target;
+    setContactObject(prevState => ({ ...prevState, [id]: value }))
   }
 
   function handleClearFields(e: React.MouseEvent<HTMLButtonElement>) {
@@ -106,7 +93,6 @@ export default function Home() {
             <button onClick={handleInsertNewContact}>
               <Plus color="#FFF" size={26} weight="bold" />
             </button>
-
             <Modal
               isOpen={modalContactIsOpen}
               onRequestClose={() => setModalContactIsOpen(false)}
@@ -126,9 +112,11 @@ export default function Home() {
                     id="name"
                     type="text"
                     min={3}
-                    name="name"
+                    // name="name"
                     value={contactObject.name}
                     onChange={handleEditContact}
+                    placeholder="Nome completo"
+                    required
                   />
                 </label>
                 <label htmlFor="email">
@@ -136,9 +124,11 @@ export default function Home() {
                   <input
                     id="email"
                     type="email"
-                    name="email"
+                    // name="email"
                     value={contactObject.email}
                     onChange={handleEditContact}
+                    placeholder="email@email.com"
+                    required
                   />
                 </label>
                 <PhoneAndBirthday>
@@ -147,9 +137,11 @@ export default function Home() {
                     <input
                       id="phone"
                       type="tel"
-                      name="phone"
+                      // name="phone"
                       value={contactObject.phone}
                       onChange={handleEditContact}
+                      placeholder="(12) 93456-7890"
+                      required
                     />
                   </label>
                   <label htmlFor="birthday">
@@ -157,9 +149,11 @@ export default function Home() {
                     <input
                       id="birthday"
                       type="text"
-                      name="birthday"
+                      // name="birthday"
                       value={contactObject.birthday}
                       onChange={handleEditContact}
+                      placeholder="01/01/1990"
+                      required
                     />
                   </label>
                 </PhoneAndBirthday>
@@ -168,14 +162,16 @@ export default function Home() {
                   <input
                     id="city"
                     type="text"
-                    name="city"
+                    // name="city"
                     value={contactObject.city}
                     onChange={handleEditContact}
+                    placeholder="Porto Alegre"
+                    required
                   />
                 </label>
                 <ModalFormButtons>
                   <button onClick={handleClearFields}>Limpar</button>
-                  <button onClick={handleSendConfirm}>Confirmar</button>
+                  <button onClick={handleSendConfirm} type="submit">Confirmar</button>
                 </ModalFormButtons>
               </ModalForm>
             </Modal>

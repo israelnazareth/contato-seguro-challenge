@@ -112,7 +112,7 @@ export const ModalHeader = styled.div`
   }
 `;
 
-export const ModalForm = styled.div`
+export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
