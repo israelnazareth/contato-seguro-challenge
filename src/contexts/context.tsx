@@ -24,7 +24,7 @@ interface MyContextData {
 export const initialStateObj = {
   name: '',
   email: '',
-  birthday: '',
+  birth_date: '',
   city: '',
   phone: ''
 }

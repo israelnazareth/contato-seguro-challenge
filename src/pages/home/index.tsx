@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image"
 import Modal from 'react-modal';
@@ -21,6 +21,17 @@ import {
 } from "./styles"
 
 export default function Home() {
+  const [users, setUsers] = useState<typeof initialStateObj[]>([]);
+
+  useEffect(() => {
+    async function handleFetch() {
+      const res = await fetch('http://localhost:3000/api/users');
+      const datas = await res.json();
+      setUsers(datas);
+    }
+    handleFetch();
+  }, [])
+
   const {
     inputValue, setInputValue,
     modalContactIsOpen, setModalContactIsOpen,
@@ -31,10 +42,10 @@ export default function Home() {
   } = useMyContext()
 
   const filteredObj = inputValue.length > 0 ?
-    data.filter(item => (
+    users.filter(item => (
       item[selectedOption as keyof typeof initialStateObj].toLowerCase()
         .includes(inputValue.toLowerCase()))
-    ) : data
+    ) : users
 
   function handleInsertNewContact() {
     setModalContactIsOpen(true);
@@ -88,7 +99,7 @@ export default function Home() {
       </Head>
       <Main>
         <Container>
-          <Image src={logo} alt='' />
+          <Image src={logo} alt='' priority />
           <Fields>
             <button onClick={handleInsertNewContact}>
               <Plus color="#FFF" size={26} weight="bold" />
@@ -144,13 +155,13 @@ export default function Home() {
                       required
                     />
                   </label>
-                  <label htmlFor="birthday">
+                  <label htmlFor="birth_date">
                     <span>Data de Nascimento:</span>
                     <input
-                      id="birthday"
+                      id="birth_date"
                       type="text"
-                      // name="birthday"
-                      value={contactObject.birthday}
+                      // name="birth_date"
+                      value={contactObject.birth_date}
                       onChange={handleEditContact}
                       placeholder="01/01/1990"
                       required
@@ -185,7 +196,7 @@ export default function Home() {
               <option value="name">Nome</option>
               <option value="email">Email</option>
               <option value="phone">Telefone</option>
-              <option value="birthday">Nascimento</option>
+              <option value="birth_date">Nascimento</option>
               <option value="city">Cidade</option>
             </select>
           </Fields>
@@ -207,7 +218,7 @@ export default function Home() {
                   <td>{obj.name}</td>
                   <td>{obj.email}</td>
                   <td>{obj.phone}</td>
-                  <td>{obj.birthday}</td>
+                  <td>{obj.birth_date}</td>
                   <td>{obj.city}</td>
                   <td>
                     <button onClick={() => handleEditButton(obj, i)}>
