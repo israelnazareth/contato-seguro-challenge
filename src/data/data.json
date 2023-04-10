@@ -3,70 +3,70 @@
     "name": "Fulano",
     "email": "fulano@tal.com.br",
     "phone": "(12) 3456-7890",
-    "birthday": "01/01/1990",
+    "birth_date": "01/01/1990",
     "city": "Rio de Janeiro"
   },
   {
     "name": "Beltrano",
     "email": "beltrano@tal.com.br",
     "phone": "(09) 8765-4321",
-    "birthday": "02/02/1991",
+    "birth_date": "02/02/1991",
     "city": "São Paulo"
   },
   {
     "name": "Cicrano",
     "email": "cicrano@tal.com.br",
     "phone": "(99) 9999-9999",
-    "birthday": "03/03/1992",
+    "birth_date": "03/03/1992",
     "city": "Porto Alegre"
   },
   {
     "name": "Lucas",
     "email": "lucas@tal.com.br",
     "phone": "(44) 4444-4444",
-    "birthday": "04/04/1993",
+    "birth_date": "04/04/1993",
     "city": "Recife"
   },
   {
     "name": "Carla",
     "email": "carla@tal.com.br",
     "phone": "(55) 5555-5555",
-    "birthday": "05/05/1994",
+    "birth_date": "05/05/1994",
     "city": "Brasília"
   },
   {
     "name": "Pedro",
     "email": "pedro@tal.com.br",
     "phone": "(66) 6666-6666",
-    "birthday": "06/06/1995",
+    "birth_date": "06/06/1995",
     "city": "Salvador"
   },
   {
     "name": "Ana",
     "email": "ana@tal.com.br",
     "phone": "(77) 7777-7777",
-    "birthday": "07/07/1996",
+    "birth_date": "07/07/1996",
     "city": "Fortaleza"
   },
   {
     "name": "Mariana",
     "email": "mariana@tal.com.br",
     "phone": "(88) 8888-8888",
-    "birthday": "08/08/1997",
+    "birth_date": "08/08/1997",
     "city": "Curitiba"
   },
   {
     "name": "Ricardo",
     "email": "ricardo@tal.com.br",
     "phone": "(99) 9999-0000",
-    "birthday": "09/09/1998",
+    "birth_date": "09/09/1998",
     "city": "Manaus"
   },
   {
     "name": "Beatriz",
     "email": "beatriz@tal.com.br",
     "phone": "(00) 0000-1111",
-    "birthday": "10/10/1999",
+    "birth_date": "10/10/1999",
     "city": "Belém"
   }
 ]

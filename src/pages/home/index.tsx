@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image"
 import Modal from 'react-modal';
+import moment from "moment";
 import logo from '../../assets/logo.png';
 import data from '../../data/data.json';
 import { initialStateObj, useMyContext } from "@/contexts/context";
@@ -42,10 +43,10 @@ export default function Home() {
   } = useMyContext()
 
   const filteredObj = inputValue.length > 0 ?
-    users.filter(item => (
+    data.filter(item => (
       item[selectedOption as keyof typeof initialStateObj].toLowerCase()
         .includes(inputValue.toLowerCase()))
-    ) : users
+    ) : data
 
   function handleInsertNewContact() {
     setModalContactIsOpen(true);
@@ -123,7 +124,6 @@ export default function Home() {
                     id="name"
                     type="text"
                     min={3}
-                    // name="name"
                     value={contactObject.name}
                     onChange={handleEditContact}
                     placeholder="Nome completo"
@@ -135,7 +135,6 @@ export default function Home() {
                   <input
                     id="email"
                     type="email"
-                    // name="email"
                     value={contactObject.email}
                     onChange={handleEditContact}
                     placeholder="email@email.com"
@@ -148,7 +147,6 @@ export default function Home() {
                     <input
                       id="phone"
                       type="tel"
-                      // name="phone"
                       value={contactObject.phone}
                       onChange={handleEditContact}
                       placeholder="(12) 93456-7890"
@@ -159,8 +157,7 @@ export default function Home() {
                     <span>Data de Nascimento:</span>
                     <input
                       id="birth_date"
-                      type="text"
-                      // name="birth_date"
+                      type="date"
                       value={contactObject.birth_date}
                       onChange={handleEditContact}
                       placeholder="01/01/1990"
@@ -173,7 +170,6 @@ export default function Home() {
                   <input
                     id="city"
                     type="text"
-                    // name="city"
                     value={contactObject.city}
                     onChange={handleEditContact}
                     placeholder="Porto Alegre"
@@ -218,7 +214,7 @@ export default function Home() {
                   <td>{obj.name}</td>
                   <td>{obj.email}</td>
                   <td>{obj.phone}</td>
-                  <td>{obj.birth_date}</td>
+                  <td>{moment(obj.birth_date).format('DD/MM/YYYY')}</td>
                   <td>{obj.city}</td>
                   <td>
                     <button onClick={() => handleEditButton(obj, i)}>
