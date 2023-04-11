@@ -12,7 +12,6 @@ export function TableContactData() {
     inputValue, setModalContactIsOpen,
     modalConfirmIsOpen, setModalConfirmIsOpen,
     selectedOption, setContactObject,
-    contactObject,
     contactID, setContactID,
     users, fetchUsers
   } = useMyContext()

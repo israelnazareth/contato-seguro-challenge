@@ -1,31 +1,11 @@
-import { UserModel, UserRow } from "@/interfaces";
+import { MyContextData, UserRow } from "@/interfaces";
 import { getUsers } from "@/services";
 import {
-  Dispatch,
-  SetStateAction,
   createContext,
   useContext,
   useEffect,
   useState
 } from "react";
-
-interface MyContextData {
-  inputValue: string
-  setInputValue: Dispatch<SetStateAction<string>>
-  modalContactIsOpen: boolean
-  setModalContactIsOpen: Dispatch<SetStateAction<boolean>>
-  modalConfirmIsOpen: boolean
-  setModalConfirmIsOpen: Dispatch<SetStateAction<boolean>>
-  selectedOption: string,
-  setSelectedOption: Dispatch<SetStateAction<string>>
-  contactObject: UserRow
-  setContactObject: Dispatch<SetStateAction<UserRow>>
-  contactID: number
-  setContactID: Dispatch<SetStateAction<number>>
-  users: UserRow[]
-  setUsers: Dispatch<SetStateAction<UserRow[]>>
-  fetchUsers: () => void
-};
 
 export const initialStateObj = {
   id: 0,
