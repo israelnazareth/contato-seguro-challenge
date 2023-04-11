@@ -1,8 +1,11 @@
+import { UserModel, UserRow } from "@/interfaces";
+import { getUsers } from "@/services";
 import {
   Dispatch,
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState
 } from "react";
 
@@ -15,13 +18,17 @@ interface MyContextData {
   setModalConfirmIsOpen: Dispatch<SetStateAction<boolean>>
   selectedOption: string,
   setSelectedOption: Dispatch<SetStateAction<string>>
-  contactObject: typeof initialStateObj
-  setContactObject: Dispatch<SetStateAction<typeof initialStateObj>>
-  contactPosition: number | null
-  setContactPosition: Dispatch<SetStateAction<number | null>>
+  contactObject: UserRow
+  setContactObject: Dispatch<SetStateAction<UserRow>>
+  contactID: number
+  setContactID: Dispatch<SetStateAction<number>>
+  users: UserRow[]
+  setUsers: Dispatch<SetStateAction<UserRow[]>>
+  fetchUsers: () => void
 };
 
 export const initialStateObj = {
+  id: 0,
   name: '',
   email: '',
   birth_date: '',
@@ -45,7 +52,19 @@ export function MyContextProvider({ children }: { children: React.ReactNode }) {
   const [modalConfirmIsOpen, setModalConfirmIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('name');
   const [contactObject, setContactObject] = useState(initialStateObj);
-  const [contactPosition, setContactPosition] = useState<number | null>(null);
+  const [contactID, setContactID] = useState<number>(0);
+  const [users, setUsers] = useState<UserRow[]>([]);
+
+  function fetchUsers() {
+    setTimeout(async () => {
+      const response = await getUsers();
+      setUsers(response);
+    }, 10)
+  }
+
+  useEffect(() => {
+    fetchUsers();
+  }, [])
 
   const values = {
     inputValue, setInputValue,
@@ -53,7 +72,8 @@ export function MyContextProvider({ children }: { children: React.ReactNode }) {
     modalConfirmIsOpen, setModalConfirmIsOpen,
     selectedOption, setSelectedOption,
     contactObject, setContactObject,
-    contactPosition, setContactPosition
+    contactID, setContactID,
+    users, setUsers, fetchUsers
   }
 
   return (

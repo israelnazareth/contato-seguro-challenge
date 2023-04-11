@@ -1,6 +1,6 @@
 import { X } from '@phosphor-icons/react';
 import Modal from 'react-modal';
-import data from '@/data/data.json';
+// import data from '@/data/data.json';
 import moment from 'moment';
 import { initialStateObj, useMyContext } from '@/contexts/context';
 import {
@@ -10,20 +10,15 @@ import {
   PhoneAndBirthday,
   modalStyle
 } from './styles';
+import { createUser, updateUser } from '@/services';
+import { useEffect } from 'react';
 
 export function ModalContactData() {
   const {
-    inputValue, selectedOption,
     modalContactIsOpen, setModalContactIsOpen,
     contactObject, setContactObject,
-    contactPosition, setContactPosition
+    fetchUsers
   } = useMyContext()
-
-  const filteredObj = inputValue.length > 0 ?
-    data.filter(item => (
-      item[selectedOption as keyof typeof initialStateObj].toLowerCase()
-        .includes(inputValue.toLowerCase()))
-    ) : data
 
   function handleEditContact(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -36,15 +31,19 @@ export function ModalContactData() {
     setContactObject(initialStateObj)
   }
 
-  function handleSendConfirm(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    if (contactPosition !== null) {
-      filteredObj[contactPosition] = contactObject;
-      setContactPosition(null);
-    } else {
-      filteredObj.push(contactObject)
+    const { id, name, email, phone, birth_date, city } = contactObject;
+
+    if (id > 0 && name && email && phone && birth_date && city) {
+      updateUser(id, contactObject)
+      setModalContactIsOpen(false);
+    } else if (id === 0 && name && email && phone && birth_date && city) {
+      createUser(contactObject)
+      setModalContactIsOpen(false);
     }
-    setModalContactIsOpen(false);
+
+    fetchUsers()
   }
 
   return (
@@ -121,7 +120,7 @@ export function ModalContactData() {
         </label>
         <ModalFormButtons>
           <button onClick={handleClearFields}>Limpar</button>
-          <button onClick={handleSendConfirm} type="submit">Confirmar</button>
+          <button onClick={handleSubmit} type="submit">Confirmar</button>
         </ModalFormButtons>
       </ModalForm>
     </Modal>

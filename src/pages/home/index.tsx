@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
 import Image from "next/image"
 import logo from '../../assets/logo.png';
@@ -9,29 +9,16 @@ import { TableContactData } from "@/components/TableContactData";
 import { Container, Fields, Main } from "./styles";
 
 export default function Home() {
-  const [users, setUsers] = useState<typeof initialStateObj[]>([]);
-
-  useEffect(() => {
-    async function handleFetch() {
-      const res = await fetch('http://localhost:3000/api/users');
-      const datas = await res.json();
-      setUsers(datas);
-    }
-    handleFetch();
-  }, [])
-
   const {
     inputValue, setInputValue,
     setModalContactIsOpen,
     setSelectedOption,
     setContactObject,
-    setContactPosition
   } = useMyContext()
 
   function handleInsertNewContact() {
     setModalContactIsOpen(true);
     setContactObject(initialStateObj);
-    setContactPosition(null);
   }
 
   return (

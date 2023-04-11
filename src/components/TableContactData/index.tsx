@@ -1,39 +1,44 @@
 import Modal from 'react-modal';
-import data from '@/data/data.json';
+// import data from '@/data/data.json';
 import moment from "moment";
-import { initialStateObj, useMyContext } from "@/contexts/context";
+import { useMyContext } from "@/contexts/context";
 import { ModalConfirmButtons, ModalConfirmContainer, Table, modalStyle } from "./styles";
 import { PencilSimpleLine, Trash } from "@phosphor-icons/react";
+import { deleteUser } from '@/services';
+import { UserModel, UserRow } from '@/interfaces';
 
 export function TableContactData() {
   const {
     inputValue, setModalContactIsOpen,
     modalConfirmIsOpen, setModalConfirmIsOpen,
     selectedOption, setContactObject,
-    contactPosition, setContactPosition
+    contactObject,
+    contactID, setContactID,
+    users, fetchUsers
   } = useMyContext()
 
   const filteredObj = inputValue.length > 0 ?
-    data.filter(item => (
-      item[selectedOption as keyof typeof initialStateObj].toLowerCase()
+    users.filter(item => (
+      item[selectedOption as keyof UserModel].toLowerCase()
         .includes(inputValue.toLowerCase()))
-    ) : data
+    ) : users
 
-  function handleEditButton(obj: typeof initialStateObj, index: number) {
+  function handleEditButton(obj: UserRow, id: number) {
     setModalContactIsOpen(true);
     setContactObject(obj);
-    setContactPosition(index);
+    setContactID(id);
   }
 
-  function handleRemoveContact(index: number) {
+  function handleRemoveContact(id: number) {
     setModalConfirmIsOpen(true)
-    setContactPosition(index);
+    setContactID(id);
   }
 
   function handleConfirmDelete() {
-    filteredObj.splice(contactPosition!, 1)
+    deleteUser(contactID)
     setModalConfirmIsOpen(false)
-    setContactPosition(null);
+    setContactID(0);
+    fetchUsers()
   }
 
   return (
@@ -58,12 +63,12 @@ export function TableContactData() {
             <td>{moment(obj.birth_date).format('DD/MM/YYYY')}</td>
             <td>{obj.city}</td>
             <td>
-              <button onClick={() => handleEditButton(obj, i)}>
+              <button onClick={() => handleEditButton(obj, obj.id)}>
                 <PencilSimpleLine size={26} color="#FFF" />
               </button>
             </td>
             <td>
-              <button onClick={() => handleRemoveContact(i)}>
+              <button onClick={() => handleRemoveContact(obj.id)}>
                 <Trash size={26} color="#FFF" />
               </button>
             </td>
@@ -73,6 +78,7 @@ export function TableContactData() {
           isOpen={modalConfirmIsOpen}
           onRequestClose={() => setModalConfirmIsOpen(false)}
           style={modalStyle}
+          ariaHideApp={false}
         >
           <ModalConfirmContainer>
             <h2>Você deseja mesmo excluir este contato?</h2>
