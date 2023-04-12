@@ -12,6 +12,17 @@ export interface UserRow extends UserModel {
   id: number
 }
 
+export interface CompanyModel {
+  name: string,
+  cnpj: string,
+  address: string,
+  users: string,
+}
+
+export interface CompanyRow extends CompanyModel {
+  id: number
+}
+
 export interface MyContextData {
   inputValue: string
   setInputValue: Dispatch<SetStateAction<string>>
@@ -28,4 +39,10 @@ export interface MyContextData {
   users: UserRow[]
   setUsers: Dispatch<SetStateAction<UserRow[]>>
   fetchUsers: () => void
+  companyObject: CompanyRow
+  setCompanyObject: Dispatch<SetStateAction<CompanyRow>>
+  companyID: number
+  setCompanyID: Dispatch<SetStateAction<number>>
+  companies: CompanyRow[]
+  setCompanies: Dispatch<SetStateAction<CompanyRow[]>>
 };

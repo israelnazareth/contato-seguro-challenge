@@ -1,4 +1,4 @@
-import { MyContextData, UserRow } from "@/interfaces";
+import { CompanyRow, MyContextData, UserRow } from "@/interfaces";
 import { getUsers } from "@/services";
 import {
   createContext,
@@ -16,6 +16,14 @@ export const initialStateObj = {
   phone: ''
 }
 
+export const initialStateObjCompany = {
+  id: 0,
+  name: '',
+  cnpj: '',
+  address: '',
+  users: '',
+}
+
 const MyContext = createContext<MyContextData>({} as MyContextData);
 
 export function useMyContext() {
@@ -31,9 +39,14 @@ export function MyContextProvider({ children }: { children: React.ReactNode }) {
   const [modalContactIsOpen, setModalContactIsOpen] = useState(false);
   const [modalConfirmIsOpen, setModalConfirmIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('name');
+
   const [contactObject, setContactObject] = useState(initialStateObj);
   const [contactID, setContactID] = useState<number>(0);
   const [users, setUsers] = useState<UserRow[]>([]);
+
+  const [companyObject, setCompanyObject] = useState(initialStateObjCompany);
+  const [companyID, setCompanyID] = useState<number>(0);
+  const [companies, setCompanies] = useState<CompanyRow[]>([]);
 
   function fetchUsers() {
     setTimeout(async () => {
@@ -53,7 +66,10 @@ export function MyContextProvider({ children }: { children: React.ReactNode }) {
     selectedOption, setSelectedOption,
     contactObject, setContactObject,
     contactID, setContactID,
-    users, setUsers, fetchUsers
+    users, setUsers, fetchUsers,
+    companyObject, setCompanyObject,
+    companyID, setCompanyID,
+    companies, setCompanies
   }
 
   return (

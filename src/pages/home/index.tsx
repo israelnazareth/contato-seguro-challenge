@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image"
 import logo from '../../assets/logo.png';
@@ -6,9 +6,12 @@ import { initialStateObj, useMyContext } from "@/contexts/context";
 import { Plus } from "@phosphor-icons/react";
 import { ModalContactData } from "@/components/ModalContactData";
 import { TableContactData } from "@/components/TableContactData";
-import { Container, Fields, Main } from "./styles";
+import { Container, Fields, Header, HeaderTable, Main } from "./styles";
+import { TableCompaniesData } from "@/components/TableCompaniesData";
 
 export default function Home() {
+  const [table, setTable] = useState('users')
+
   const {
     inputValue, setInputValue,
     setModalContactIsOpen,
@@ -21,6 +24,10 @@ export default function Home() {
     setContactObject(initialStateObj);
   }
 
+  function handleTable() {
+    table === 'users' ? setTable('companies') : setTable('users')
+  }
+
   return (
     <>
       <Head>
@@ -29,7 +36,15 @@ export default function Home() {
       <Main>
         <Container>
           <ModalContactData />
-          <Image src={logo} alt='' priority />
+          <Header>
+            <Image src={logo} alt='' priority />
+            <div>
+              <strong>Visualizar:</strong>
+              <button type="button" onClick={handleTable}>
+                {table === 'users' ? 'Empresas' : 'Usuários'}
+              </button>
+            </div>
+          </Header>
           <Fields>
             <button onClick={handleInsertNewContact}>
               <Plus color="#FFF" size={26} weight="bold" />
@@ -42,13 +57,31 @@ export default function Home() {
             />
             <select onChange={(e) => setSelectedOption(e.target.value)}>
               <option value="name">Nome</option>
-              <option value="email">Email</option>
-              <option value="phone">Telefone</option>
-              <option value="birth_date">Nascimento</option>
-              <option value="city">Cidade</option>
+              {table === 'users' ?
+                <>
+                  <option value="email">Email</option>
+                  <option value="phone">Telefone</option>
+                  <option value="birth_date">Nascimento</option>
+                  <option value="city">Cidade</option>
+                </> :
+                <>
+                  <option value="cnpj">CNPJ</option>
+                  <option value="address">Endereço</option>
+                  <option value="users">Usuários</option>
+                </>
+              }
             </select>
           </Fields>
-          <TableContactData />
+          {table === 'users' ?
+            <>
+              <HeaderTable>Usuários</HeaderTable>
+              <TableContactData />
+            </> :
+            <>
+              <HeaderTable>Empresas</HeaderTable>
+              <TableCompaniesData />
+            </>
+          }
         </Container>
       </Main >
     </>

@@ -25,9 +25,29 @@ export const Container = styled.div`
   min-width: 50rem;
 `;
 
+export const Header = styled.header`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+
+  strong {
+    margin-right: 10px;
+  }
+
+  button {
+    border: none;
+    background-color: #000;
+    color: #FFF;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+`;
+
 export const Fields = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
   gap: 1.5rem;
   margin-top: 1rem;
@@ -51,3 +71,10 @@ export const Fields = styled.div`
     border-radius: 4px;
   }
 `
+
+export const HeaderTable = styled.h2`
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  color: #1E1E1E;
+`;

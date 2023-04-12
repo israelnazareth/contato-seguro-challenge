@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Company A",
+    "cnpj": "12.345.678/0001-34",
+    "address": "Rua tal, nº tal",
+    "users": "usuário A, usuário B"
+  },
+  {
+    "id": 2,
+    "name": "Company B",
+    "cnpj": "12.345.678/0001-34",
+    "address": "Rua tal, nº tal",
+    "users": "usuário A, usuário B"
+  },
+  {
+    "id": 3,
+    "name": "Company C",
+    "cnpj": "12.345.678/0001-34",
+    "address": "Rua tal, nº tal",
+    "users": "usuário A, usuário B"
+  }
+]

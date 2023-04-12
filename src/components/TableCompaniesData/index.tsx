@@ -1,43 +1,38 @@
 import Modal from 'react-modal';
-// import data from '@/data/data.json';
-import moment from "moment";
+import companies from '@/data/companies.json';
 import { useMyContext } from "@/contexts/context";
 import { ModalConfirmButtons, ModalConfirmContainer, Table, modalStyle } from "./styles";
 import { PencilSimpleLine, Trash } from "@phosphor-icons/react";
-import { deleteUser } from '@/services';
-import { UserModel, UserRow } from '@/interfaces';
+import { CompanyModel, CompanyRow } from '@/interfaces';
 
-export function TableContactData() {
+export function TableCompaniesData() {
   const {
     inputValue, setModalContactIsOpen,
     modalConfirmIsOpen, setModalConfirmIsOpen,
-    selectedOption, setContactObject,
-    contactID, setContactID,
-    users, fetchUsers
+    selectedOption, setCompanyObject,
+    setCompanyID,
   } = useMyContext()
 
-  const filteredContact = inputValue.length > 0 ?
-    users.filter(item => (
-      item[selectedOption as keyof UserModel].toLowerCase()
+  const filteredCompany = inputValue.length > 0 ?
+    companies.filter(item => (
+      item[selectedOption as keyof CompanyModel].toLowerCase()
         .includes(inputValue.toLowerCase()))
-    ) : users
+    ) : companies
 
-  function handleEditButton(obj: UserRow, id: number) {
+  function handleEditButton(obj: CompanyRow, id: number) {
     setModalContactIsOpen(true);
-    setContactObject(obj);
-    setContactID(id);
+    setCompanyObject(obj);
+    setCompanyID(id);
   }
 
   function handleRemoveContact(id: number) {
     setModalConfirmIsOpen(true)
-    setContactID(id);
+    setCompanyID(id);
   }
 
   function handleConfirmDelete() {
-    deleteUser(contactID)
     setModalConfirmIsOpen(false)
-    setContactID(0);
-    fetchUsers()
+    setCompanyID(0);
   }
 
   return (
@@ -45,22 +40,20 @@ export function TableContactData() {
       <thead>
         <tr>
           <th>Nome</th>
-          <th>Email</th>
-          <th>Telefone</th>
-          <th>Nascimento</th>
-          <th>Cidade</th>
+          <th>CNPJ</th>
+          <th>Endereço</th>
+          <th>Usuários</th>
           <th>Editar</th>
           <th>Excluir</th>
         </tr>
       </thead>
       <tbody>
-        {filteredContact.map((obj, i) => (
+        {filteredCompany.map((obj, i) => (
           <tr key={i}>
             <td>{obj.name}</td>
-            <td>{obj.email}</td>
-            <td>{obj.phone}</td>
-            <td>{moment(obj.birth_date).format('DD/MM/YYYY')}</td>
-            <td>{obj.city}</td>
+            <td>{obj.cnpj}</td>
+            <td>{obj.address}</td>
+            <td>{obj.users}</td>
             <td>
               <button onClick={() => handleEditButton(obj, obj.id)}>
                 <PencilSimpleLine size={26} color="#FFF" />
