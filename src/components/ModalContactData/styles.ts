@@ -1,3 +1,4 @@
+import { Form } from "@unform/web";
 import styled from "styled-components";
 
 export const modalStyle = {
@@ -34,7 +35,7 @@ export const ModalHeader = styled.div`
   }
 `;
 
-export const ModalForm = styled.form`
+export const ModalForm = styled(Form)`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;

@@ -1,7 +1,5 @@
 import { X } from '@phosphor-icons/react';
 import Modal from 'react-modal';
-// import data from '@/data/data.json';
-import moment from 'moment';
 import { initialStateObj, useMyContext } from '@/contexts/context';
 import {
   ModalForm,
@@ -11,35 +9,55 @@ import {
   modalStyle
 } from './styles';
 import { createUser, updateUser } from '@/services';
-import { useEffect } from 'react';
+import Input from '../Input';
+import { useRef } from 'react';
+import { UserModel } from '@/interfaces';
+import { FormHandles } from '@unform/core';
 
 export function ModalContactData() {
+  const formRef = useRef<FormHandles>(null);
+
   const {
     modalContactIsOpen, setModalContactIsOpen,
     contactObject, setContactObject,
     fetchUsers
   } = useMyContext()
 
-  function handleEditContact(e: React.ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    const { id, value } = e.target;
-    setContactObject(prevState => ({ ...prevState, [id]: value }))
-  }
-
-  function handleClearFields(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
+  function handleClearFields() {
     setContactObject(initialStateObj)
+    formRef.current!.reset()
   }
 
-  function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    const { id, name, email, phone, birth_date, city } = contactObject;
+  function handleSubmit(data: UserModel) {
+    const { name, email } = data;
+    const { id } = contactObject
 
-    if (id > 0 && name && email && phone && birth_date && city) {
-      updateUser(id, contactObject)
+    if (!name || !name.trim()) {
+      formRef.current?.setFieldError('name', 'Nome obrigatório.')
+      return;
+    }
+
+    if (name.length < 3) {
+      formRef.current?.setFieldError('name', 'Nome deve ter no mínimo 3 caracteres.')
+      return;
+    }
+
+    if (!email || !email.trim()) {
+      formRef.current?.setFieldError('email', 'Email obrigatório.')
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.match(emailRegex)) {
+      formRef.current?.setFieldError('email', 'Email inválido.');
+      return;
+    }
+
+    if (id > 0) {
+      updateUser(id, data)
       setModalContactIsOpen(false);
-    } else if (id === 0 && name && email && phone && birth_date && city) {
-      createUser(contactObject)
+    } else if (id === 0) {
+      createUser(data)
       setModalContactIsOpen(false);
     }
 
@@ -54,73 +72,50 @@ export function ModalContactData() {
       ariaHideApp={false}
     >
       <ModalHeader>
-        <h2>Inserir</h2>
+        {contactObject.id > 0 ? <h2>Editar</h2> : <h2>Inserir</h2>}
         <button onClick={() => setModalContactIsOpen(false)}>
           <X color="#EEE" size={30} weight="bold" />
         </button>
       </ModalHeader>
-      <ModalForm>
-        <label htmlFor="name">
-          <span>Nome:</span>
-          <input
-            id="name"
-            type="text"
-            min={3}
-            value={contactObject.name}
-            onChange={handleEditContact}
-            placeholder="Nome completo"
-            required
-          />
-        </label>
-        <label htmlFor="email">
-          <span>E-mail:</span>
-          <input
-            id="email"
-            type="email"
-            value={contactObject.email}
-            onChange={handleEditContact}
-            placeholder="email@email.com"
-            required
-          />
-        </label>
+      <ModalForm onSubmit={handleSubmit} ref={formRef}>
+        <Input
+          name="name"
+          label='Nome:'
+          placeholder='Nome completo'
+          defaultValue={contactObject.name}
+        />
+        <Input
+          name="email"
+          label='Email:'
+          placeholder='email@email.com'
+          defaultValue={contactObject.email}
+        />
         <PhoneAndBirthday>
-          <label htmlFor="phone">
-            <span>Telefone:</span>
-            <input
-              id="phone"
-              type="tel"
-              value={contactObject.phone}
-              onChange={handleEditContact}
-              placeholder="(12) 93456-7890"
-              required
-            />
-          </label>
-          <label htmlFor="birth_date">
-            <span>Data de Nascimento:</span>
-            <input
-              id="birth_date"
-              type="date"
-              value={moment(contactObject.birth_date).format('YYYY-MM-DD')}
-              onChange={handleEditContact}
-              placeholder="01/01/1990"
-              required
-            />
-          </label>
-        </PhoneAndBirthday>
-        <label htmlFor="city">
-          <span>Cidade onde nasceu:</span>
-          <input
-            id="city"
-            type="text"
-            value={contactObject.city}
-            onChange={handleEditContact}
-            placeholder="Porto Alegre"
-            required
+          <Input
+            type='tel'
+            mask="(99) 99999-9999"
+            name="phone"
+            label='Telefone:'
+            placeholder='(12) 93456-7890'
+            defaultValue={contactObject.phone}
           />
-        </label>
+          <Input
+            name="birth_date"
+            type='date'
+            label='Data de nascimento:'
+            placeholder="01/01/1990"
+            defaultValue={contactObject.birth_date}
+          />
+        </PhoneAndBirthday>
+        <Input
+          name="city"
+          label='Cidade onde nasceu:'
+          placeholder="Porto Alegre"
+          defaultValue={contactObject.city}
+        />
         <ModalFormButtons>
+          <button type="submit">Confirmar</button>
           <button onClick={handleClearFields}>Limpar</button>
-          <button onClick={handleSubmit} type="submit">Confirmar</button>
         </ModalFormButtons>
       </ModalForm>
     </Modal>

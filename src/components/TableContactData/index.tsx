@@ -4,7 +4,7 @@ import moment from "moment";
 import { useMyContext } from "@/contexts/context";
 import { ModalConfirmButtons, ModalConfirmContainer, Table, modalStyle } from "./styles";
 import { PencilSimpleLine, Trash } from "@phosphor-icons/react";
-import { deleteUser } from '@/services';
+import { deleteUser, getUserByID } from '@/services';
 import { UserModel, UserRow } from '@/interfaces';
 
 export function TableContactData() {
