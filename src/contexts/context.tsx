@@ -21,7 +21,7 @@ export const initialStateObjCompany = {
   name: '',
   cnpj: '',
   address: '',
-  users: '',
+  users: [0],
 }
 
 const MyContext = createContext<MyContextData>({} as MyContextData);

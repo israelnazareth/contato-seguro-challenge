@@ -16,7 +16,7 @@ export interface CompanyModel {
   name: string,
   cnpj: string,
   address: string,
-  users: string,
+  users: number[],
 }
 
 export interface CompanyRow extends CompanyModel {

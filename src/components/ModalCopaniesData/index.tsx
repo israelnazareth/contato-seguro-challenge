@@ -50,7 +50,7 @@ export function ModalCompaniesData() {
       return;
     }
 
-    if (!users || !users.trim()) {
+    if (!users) {
       formRef.current?.setFieldError('users', 'Usuário(s) obrigatório(s).');
       return;
     }
@@ -103,7 +103,7 @@ export function ModalCompaniesData() {
           name="users"
           label='Usuários:'
           placeholder="Fulano, Beltrano, Ciclano"
-          defaultValue={companyObject.users}
+          defaultValue={companyObject.users[0]}
         />
         <ModalFormButtons>
           <button type="submit">Confirmar</button>
