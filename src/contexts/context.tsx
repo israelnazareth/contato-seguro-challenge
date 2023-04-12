@@ -36,8 +36,6 @@ export function useMyContext() {
 
 export function MyContextProvider({ children }: { children: React.ReactNode }) {
   const [inputValue, setInputValue] = useState('');
-  const [modalContactIsOpen, setModalContactIsOpen] = useState(false);
-  const [modalConfirmIsOpen, setModalConfirmIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('name');
 
   const [contactObject, setContactObject] = useState(initialStateObj);
@@ -47,6 +45,9 @@ export function MyContextProvider({ children }: { children: React.ReactNode }) {
   const [companyObject, setCompanyObject] = useState(initialStateObjCompany);
   const [companyID, setCompanyID] = useState<number>(0);
   const [companies, setCompanies] = useState<CompanyRow[]>([]);
+
+  const [modalConfirmIsOpen, setModalConfirmIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   function fetchUsers() {
     setTimeout(async () => {
@@ -61,7 +62,7 @@ export function MyContextProvider({ children }: { children: React.ReactNode }) {
 
   const values = {
     inputValue, setInputValue,
-    modalContactIsOpen, setModalContactIsOpen,
+    modalIsOpen, setModalIsOpen,
     modalConfirmIsOpen, setModalConfirmIsOpen,
     selectedOption, setSelectedOption,
     contactObject, setContactObject,
@@ -69,7 +70,7 @@ export function MyContextProvider({ children }: { children: React.ReactNode }) {
     users, setUsers, fetchUsers,
     companyObject, setCompanyObject,
     companyID, setCompanyID,
-    companies, setCompanies
+    companies, setCompanies,
   }
 
   return (

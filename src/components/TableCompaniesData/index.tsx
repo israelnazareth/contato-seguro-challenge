@@ -7,7 +7,7 @@ import { CompanyModel, CompanyRow } from '@/interfaces';
 
 export function TableCompaniesData() {
   const {
-    inputValue, setModalContactIsOpen,
+    inputValue, setModalIsOpen,
     modalConfirmIsOpen, setModalConfirmIsOpen,
     selectedOption, setCompanyObject,
     setCompanyID,
@@ -20,7 +20,7 @@ export function TableCompaniesData() {
     ) : companies
 
   function handleEditButton(obj: CompanyRow, id: number) {
-    setModalContactIsOpen(true);
+    setModalIsOpen(true);
     setCompanyObject(obj);
     setCompanyID(id);
   }

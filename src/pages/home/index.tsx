@@ -2,26 +2,27 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image"
 import logo from '../../assets/logo.png';
-import { initialStateObj, useMyContext } from "@/contexts/context";
+import { initialStateObj, initialStateObjCompany, useMyContext } from "@/contexts/context";
 import { Plus } from "@phosphor-icons/react";
 import { ModalContactData } from "@/components/ModalContactData";
 import { TableContactData } from "@/components/TableContactData";
 import { Container, Fields, Header, HeaderTable, Main } from "./styles";
 import { TableCompaniesData } from "@/components/TableCompaniesData";
+import { ModalCompaniesData } from "@/components/ModalCopaniesData";
 
 export default function Home() {
   const [table, setTable] = useState('users')
 
   const {
     inputValue, setInputValue,
-    setModalContactIsOpen,
-    setSelectedOption,
-    setContactObject,
+    setModalIsOpen, setSelectedOption,
+    setContactObject, setCompanyObject,
   } = useMyContext()
 
   function handleInsertNewContact() {
-    setModalContactIsOpen(true);
+    setModalIsOpen(true);
     setContactObject(initialStateObj);
+    setCompanyObject(initialStateObjCompany);
   }
 
   function handleTable() {
@@ -35,7 +36,6 @@ export default function Home() {
       </Head>
       <Main>
         <Container>
-          <ModalContactData />
           <Header>
             <Image src={logo} alt='' priority />
             <div>
@@ -74,10 +74,12 @@ export default function Home() {
           </Fields>
           {table === 'users' ?
             <>
+              <ModalContactData />
               <HeaderTable>Usuários</HeaderTable>
               <TableContactData />
             </> :
             <>
+              <ModalCompaniesData />
               <HeaderTable>Empresas</HeaderTable>
               <TableCompaniesData />
             </>

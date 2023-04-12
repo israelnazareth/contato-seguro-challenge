@@ -9,7 +9,7 @@ import { UserModel, UserRow } from '@/interfaces';
 
 export function TableContactData() {
   const {
-    inputValue, setModalContactIsOpen,
+    inputValue, setModalIsOpen,
     modalConfirmIsOpen, setModalConfirmIsOpen,
     selectedOption, setContactObject,
     contactID, setContactID,
@@ -23,7 +23,7 @@ export function TableContactData() {
     ) : users
 
   function handleEditButton(obj: UserRow, id: number) {
-    setModalContactIsOpen(true);
+    setModalIsOpen(true);
     setContactObject(obj);
     setContactID(id);
   }

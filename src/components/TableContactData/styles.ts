@@ -11,6 +11,13 @@ export const Table = styled.table`
     padding: 0.5rem;
   }
 
+  th {
+    &:nth-last-child(1),
+    &:nth-last-child(2) {
+      text-align: center;
+    }
+  }
+
   td {
     button {
       display: flex;

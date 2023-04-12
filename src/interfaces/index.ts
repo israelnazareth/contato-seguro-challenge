@@ -26,8 +26,8 @@ export interface CompanyRow extends CompanyModel {
 export interface MyContextData {
   inputValue: string
   setInputValue: Dispatch<SetStateAction<string>>
-  modalContactIsOpen: boolean
-  setModalContactIsOpen: Dispatch<SetStateAction<boolean>>
+  modalIsOpen: boolean
+  setModalIsOpen: Dispatch<SetStateAction<boolean>>
   modalConfirmIsOpen: boolean
   setModalConfirmIsOpen: Dispatch<SetStateAction<boolean>>
   selectedOption: string,

@@ -1,36 +1,34 @@
 import { X } from '@phosphor-icons/react';
 import Modal from 'react-modal';
-import { initialStateObj, useMyContext } from '@/contexts/context';
+import { initialStateObjCompany, useMyContext } from '@/contexts/context';
 import {
   ModalForm,
   ModalFormButtons,
   ModalHeader,
-  PhoneAndBirthday,
   modalStyle
 } from './styles';
-import { createUser, updateUser } from '@/services';
 import Input from '../Input';
 import { useRef } from 'react';
-import { UserModel } from '@/interfaces';
+import { CompanyModel } from '@/interfaces';
 import { FormHandles } from '@unform/core';
 
-export function ModalContactData() {
+export function ModalCompaniesData() {
   const formRef = useRef<FormHandles>(null);
 
   const {
     modalIsOpen, setModalIsOpen,
-    contactObject, setContactObject,
+    companyObject, setCompanyObject,
     fetchUsers
   } = useMyContext()
 
   function handleClearFields() {
-    setContactObject(initialStateObj)
+    setCompanyObject(initialStateObjCompany)
     formRef.current!.reset()
   }
 
-  function handleSubmit(data: UserModel) {
-    const { name, email } = data;
-    const { id } = contactObject
+  function handleSubmit(data: CompanyModel) {
+    const { name, cnpj, address, users } = data;
+    const { id } = companyObject
 
     if (!name || !name.trim()) {
       formRef.current?.setFieldError('name', 'Nome obrigatório.')
@@ -42,22 +40,26 @@ export function ModalContactData() {
       return;
     }
 
-    if (!email || !email.trim()) {
-      formRef.current?.setFieldError('email', 'Email obrigatório.')
+    if (!cnpj || !cnpj.trim()) {
+      formRef.current?.setFieldError('cnpj', 'CNPJ obrigatório.')
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.match(emailRegex)) {
-      formRef.current?.setFieldError('email', 'Email inválido.');
+    if (!address || !address.trim()) {
+      formRef.current?.setFieldError('address', 'Endereço obrigatório.');
+      return;
+    }
+
+    if (!users || !users.trim()) {
+      formRef.current?.setFieldError('users', 'Usuário(s) obrigatório(s).');
       return;
     }
 
     if (id > 0) {
-      updateUser(id, data)
+      // updateUser(id, data)
       setModalIsOpen(false);
     } else if (id === 0) {
-      createUser(data)
+      // createUser(data)
       setModalIsOpen(false);
     }
 
@@ -72,7 +74,7 @@ export function ModalContactData() {
       ariaHideApp={false}
     >
       <ModalHeader>
-        {contactObject.id > 0 ? <h2>Editar contato</h2> : <h2>Inserir usuário</h2>}
+        {companyObject.id > 0 ? <h2>Editar empresa</h2> : <h2>Inserir empresa</h2>}
         <button onClick={() => setModalIsOpen(false)}>
           <X color="#EEE" size={30} weight="bold" />
         </button>
@@ -82,36 +84,26 @@ export function ModalContactData() {
           name="name"
           label='Nome:'
           placeholder='Nome completo'
-          defaultValue={contactObject.name}
+          defaultValue={companyObject.name}
         />
         <Input
-          name="email"
-          label='Email:'
-          placeholder='email@email.com'
-          defaultValue={contactObject.email}
+          name="cnpj"
+          label='CNPJ:'
+          mask="99.999.999/9999-99"
+          placeholder='12.345.678/0001-34'
+          defaultValue={companyObject.cnpj}
         />
-        <PhoneAndBirthday>
-          <Input
-            type='tel'
-            mask="(99) 99999-9999"
-            name="phone"
-            label='Telefone:'
-            placeholder='(12) 93456-7890'
-            defaultValue={contactObject.phone}
-          />
-          <Input
-            name="birth_date"
-            type='date'
-            label='Data de nascimento:'
-            placeholder="01/01/1990"
-            defaultValue={contactObject.birth_date}
-          />
-        </PhoneAndBirthday>
         <Input
-          name="city"
-          label='Cidade onde nasceu:'
-          placeholder="Porto Alegre"
-          defaultValue={contactObject.city}
+          name="address"
+          label='Endereço:'
+          placeholder='Rua do Exemplo, nº 123'
+          defaultValue={companyObject.address}
+        />
+        <Input
+          name="users"
+          label='Usuários:'
+          placeholder="Fulano, Beltrano, Ciclano"
+          defaultValue={companyObject.users}
         />
         <ModalFormButtons>
           <button type="submit">Confirmar</button>
