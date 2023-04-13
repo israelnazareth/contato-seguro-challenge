@@ -8,11 +8,12 @@ import {
   PhoneAndBirthday,
   modalStyle
 } from './styles';
-import { createUser, updateUser } from '@/services';
+import { createUser, updateUser } from '@/services/users';
 import Input from '../Input';
 import { useRef } from 'react';
 import { UserModel } from '@/interfaces';
 import { FormHandles } from '@unform/core';
+import { userFormValidation } from '@/validations/userFormValidation';
 
 export function ModalContactData() {
   const formRef = useRef<FormHandles>(null);
@@ -29,29 +30,10 @@ export function ModalContactData() {
   }
 
   function handleSubmit(data: UserModel) {
-    const { name, email } = data;
     const { id } = contactObject
 
-    if (!name || !name.trim()) {
-      formRef.current?.setFieldError('name', 'Nome obrigatório.')
-      return;
-    }
-
-    if (name.length < 3) {
-      formRef.current?.setFieldError('name', 'Nome deve ter no mínimo 3 caracteres.')
-      return;
-    }
-
-    if (!email || !email.trim()) {
-      formRef.current?.setFieldError('email', 'Email obrigatório.')
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.match(emailRegex)) {
-      formRef.current?.setFieldError('email', 'Email inválido.');
-      return;
-    }
+    const validation = userFormValidation(data, formRef)
+    if (validation !== null) return;
 
     if (id > 0) {
       updateUser(id, data)
@@ -103,7 +85,6 @@ export function ModalContactData() {
             name="birth_date"
             type='date'
             label='Data de nascimento:'
-            placeholder="01/01/1990"
             defaultValue={contactObject.birth_date}
           />
         </PhoneAndBirthday>

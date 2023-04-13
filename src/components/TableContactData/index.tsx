@@ -4,7 +4,7 @@ import moment from "moment";
 import { useMyContext } from "@/contexts/context";
 import { ModalConfirmButtons, ModalConfirmContainer, Table, modalStyle } from "./styles";
 import { PencilSimpleLine, Trash } from "@phosphor-icons/react";
-import { deleteUser } from '@/services';
+import { deleteUser } from '@/services/users';
 import { UserModel, UserRow } from '@/interfaces';
 
 export function TableContactData() {
@@ -40,6 +40,10 @@ export function TableContactData() {
     fetchUsers()
   }
 
+  function formatedDate(date: string) {
+    return moment(date).format('DD/MM/YYYY')
+  }
+
   return (
     <Table>
       <thead>
@@ -59,7 +63,7 @@ export function TableContactData() {
             <td>{obj.name}</td>
             <td>{obj.email}</td>
             <td>{obj.phone}</td>
-            <td>{moment(obj.birth_date).format('DD/MM/YYYY')}</td>
+            <td>{obj.birth_date ? formatedDate(obj.birth_date) : 'N/A'}</td>
             <td>{obj.city}</td>
             <td>
               <button onClick={() => handleEditButton(obj, obj.id)}>

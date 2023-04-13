@@ -26,6 +26,7 @@
     "react-dom": "18.2.0",
     "react-input-mask": "^3.0.0-alpha.2",
     "react-modal": "^3.16.1",
+    "react-select": "^5.7.2",
     "sqlite3": "^5.1.6",
     "styled-components": "^5.3.9",
     "typescript": "5.0.3"

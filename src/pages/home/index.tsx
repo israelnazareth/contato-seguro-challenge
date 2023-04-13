@@ -8,7 +8,7 @@ import { ModalContactData } from "@/components/ModalContactData";
 import { TableContactData } from "@/components/TableContactData";
 import { Container, Fields, Header, HeaderTable, Main } from "./styles";
 import { TableCompaniesData } from "@/components/TableCompaniesData";
-import { ModalCompaniesData } from "@/components/ModalCopaniesData";
+import { ModalCompaniesData } from "@/components/ModalCompaniesData";
 
 export default function Home() {
   const [table, setTable] = useState('users')

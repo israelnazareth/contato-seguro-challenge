@@ -2,29 +2,34 @@ import { UserModel } from '@/interfaces';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://localhost:3000/api/users',
 })
 
 export async function getUsers() {
-  const response = await api.get('/users');
+  const response = await api.get('/');
   return response.data;
 }
 
 export async function getUserByID(id: number) {
-  const response = await api.get(`/users/${id}`);
+  const response = await api.get(`/${id}`);
   return response.data;
 }
 
 export async function createUser(user: UserModel) {
-  const response = await api.post('/users', user);
+  const response = await api.post('/', user);
   return response.data;
 }
 
 export async function updateUser(id: number, user: UserModel) {
-  const response = await api.put(`/users/${id}`, user);
+  const response = await api.put(`/${id}`, user);
   return response.data;
 }
 
 export async function deleteUser(id: number) {
-  await api.delete(`/users/${id}`);
+  await api.delete(`/${id}`);
+}
+
+export async function getCompaniesByUserID(id: number) {
+  const response = await api.get(`/${id}/companies`);
+  return response.data;
 }

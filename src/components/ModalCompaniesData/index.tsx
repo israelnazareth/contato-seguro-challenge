@@ -1,16 +1,14 @@
-import { X } from '@phosphor-icons/react';
 import Modal from 'react-modal';
-import { initialStateObjCompany, useMyContext } from '@/contexts/context';
-import {
-  ModalForm,
-  ModalFormButtons,
-  ModalHeader,
-  modalStyle
-} from './styles';
 import Input from '../Input';
+import { X } from '@phosphor-icons/react';
 import { useRef } from 'react';
 import { CompanyModel } from '@/interfaces';
 import { FormHandles } from '@unform/core';
+import { SelectUsers } from '../Select';
+import { createCompany, updateCompany } from '@/services/companies';
+import { initialStateObjCompany, useMyContext } from '@/contexts/context';
+import { ModalForm, ModalFormButtons, ModalHeader, modalStyle } from './styles';
+import { companyFormValidation } from '@/validations/companyFormValidation';
 
 export function ModalCompaniesData() {
   const formRef = useRef<FormHandles>(null);
@@ -18,7 +16,7 @@ export function ModalCompaniesData() {
   const {
     modalIsOpen, setModalIsOpen,
     companyObject, setCompanyObject,
-    fetchUsers
+    users
   } = useMyContext()
 
   function handleClearFields() {
@@ -27,43 +25,22 @@ export function ModalCompaniesData() {
   }
 
   function handleSubmit(data: CompanyModel) {
-    const { name, cnpj, address, users } = data;
     const { id } = companyObject
 
-    if (!name || !name.trim()) {
-      formRef.current?.setFieldError('name', 'Nome obrigatório.')
-      return;
-    }
-
-    if (name.length < 3) {
-      formRef.current?.setFieldError('name', 'Nome deve ter no mínimo 3 caracteres.')
-      return;
-    }
-
-    if (!cnpj || !cnpj.trim()) {
-      formRef.current?.setFieldError('cnpj', 'CNPJ obrigatório.')
-      return;
-    }
-
-    if (!address || !address.trim()) {
-      formRef.current?.setFieldError('address', 'Endereço obrigatório.');
-      return;
-    }
-
-    if (!users) {
-      formRef.current?.setFieldError('users', 'Usuário(s) obrigatório(s).');
-      return;
-    }
+    const validation = companyFormValidation(data, formRef)
+    if (validation !== null) return;
 
     if (id > 0) {
-      // updateUser(id, data)
+      updateCompany(id, data);
       setModalIsOpen(false);
     } else if (id === 0) {
-      // createUser(data)
+      createCompany(data);
       setModalIsOpen(false);
     }
+  }
 
-    fetchUsers()
+  function usersOptions() {
+    return users.map(user => ({ label: user.name, value: user.id }))
   }
 
   return (
@@ -99,11 +76,11 @@ export function ModalCompaniesData() {
           placeholder='Rua do Exemplo, nº 123'
           defaultValue={companyObject.address}
         />
-        <Input
-          name="users"
+        <SelectUsers
+          name='users'
           label='Usuários:'
-          placeholder="Fulano, Beltrano, Ciclano"
-          defaultValue={companyObject.users[0]}
+          options={usersOptions()}
+          isMulti
         />
         <ModalFormButtons>
           <button type="submit">Confirmar</button>

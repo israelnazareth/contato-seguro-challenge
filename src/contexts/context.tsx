@@ -1,5 +1,5 @@
 import { CompanyRow, MyContextData, UserRow } from "@/interfaces";
-import { getUsers } from "@/services";
+import { getUsers } from "@/services/users";
 import {
   createContext,
   useContext,
