@@ -22,7 +22,8 @@ export const Container = styled.div`
   background-color: #EEE;
   padding: 1rem;
   border-radius: 8px;
-  min-width: 50rem;
+  max-width: 90vw;
+  max-height: 95vh;
 `;
 
 export const Header = styled.header`
@@ -30,6 +31,12 @@ export const Header = styled.header`
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    max-width: 18.5rem;
+  }
 
   strong {
     margin-right: 10px;
@@ -43,16 +50,22 @@ export const Header = styled.header`
     border-radius: 4px;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 `;
 
 export const Fields = styled.div`
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  gap: 1.5rem;
+  gap: 1rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
 
-  > button {
+  button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,11 +77,18 @@ export const Fields = styled.div`
     cursor: pointer;
   }
 
-  > input {
-    width: 25rem;
+  input {
+    width: 100%;
+    max-width: 40rem;
     padding: 0 0.5rem;
     border: 1px solid gray;
     border-radius: 4px;
+    flex: 1 50%;
+  }
+
+  select {
+    flex: 1 5%;
+    height: 40px;
   }
 `
 

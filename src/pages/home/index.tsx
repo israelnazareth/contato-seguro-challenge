@@ -6,7 +6,7 @@ import { initialStateObj, initialStateObjCompany, useMyContext } from "@/context
 import { Plus } from "@phosphor-icons/react";
 import { ModalContactData } from "@/components/ModalContactData";
 import { TableContactData } from "@/components/TableContactData";
-import { Container, Fields, Header, HeaderTable, Main } from "./styles";
+import { Container, Fields, Header, Main } from "./styles";
 import { TableCompaniesData } from "@/components/TableCompaniesData";
 import { ModalCompaniesData } from "@/components/ModalCompaniesData";
 
@@ -69,7 +69,7 @@ export default function Home() {
                 <>
                   <option value="cnpj">CNPJ</option>
                   <option value="address">Endereço</option>
-                  {/* <option value="users">Usuários</option> */}
+                  <option value="users">Usuários</option>
                 </>
               }
             </select>
@@ -77,12 +77,10 @@ export default function Home() {
           {table === 'users' ?
             <>
               <ModalContactData />
-              <HeaderTable>Usuários</HeaderTable>
               <TableContactData />
             </> :
             <>
               <ModalCompaniesData />
-              <HeaderTable>Empresas</HeaderTable>
               <TableCompaniesData />
             </>
           }

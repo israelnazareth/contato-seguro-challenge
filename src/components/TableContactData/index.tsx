@@ -2,7 +2,7 @@ import Modal from 'react-modal';
 // import data from '@/data/data.json';
 import moment from "moment";
 import { useMyContext } from "@/contexts/context";
-import { ModalConfirmButtons, ModalConfirmContainer, Table, modalStyle } from "./styles";
+import { ContainerTable, ModalConfirmButtons, ModalConfirmContainer, Table, modalStyle } from "./styles";
 import { PencilSimpleLine, Trash } from "@phosphor-icons/react";
 import { deleteUser } from '@/services/users';
 import { UserModel, UserRow } from '@/interfaces';
@@ -48,54 +48,57 @@ export function TableContactData() {
   return (
     <>
       {filteredContact.length === 0 ? <NoData /> :
-        <Table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>Telefone</th>
-              <th>Nascimento</th>
-              <th>Cidade</th>
-              <th>Editar</th>
-              <th>Excluir</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredContact.map((obj, i) => (
-              <tr key={i}>
-                <td>{obj.name}</td>
-                <td>{obj.email}</td>
-                <td>{obj.phone}</td>
-                <td>{obj.birth_date ? formatedDate(obj.birth_date) : 'N/A'}</td>
-                <td>{obj.city}</td>
-                <td>
-                  <button onClick={() => handleEditButton(obj, obj.id)}>
-                    <PencilSimpleLine size={26} color="#FFF" />
-                  </button>
-                </td>
-                <td>
-                  <button onClick={() => handleRemoveContact(obj.id)}>
-                    <Trash size={26} color="#FFF" />
-                  </button>
-                </td>
+        <ContainerTable>
+          <Table>
+            <caption>Usuários</caption>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Nascimento</th>
+                <th>Cidade</th>
+                <th>Editar</th>
+                <th>Excluir</th>
               </tr>
-            ))}
-            <Modal
-              isOpen={modalConfirmIsOpen}
-              onRequestClose={() => setModalConfirmIsOpen(false)}
-              style={modalStyle}
-              ariaHideApp={false}
-            >
-              <ModalConfirmContainer>
-                <h2>Você deseja mesmo excluir este contato?</h2>
-                <ModalConfirmButtons>
-                  <button onClick={handleConfirmDelete}>Sim</button>
-                  <button onClick={() => setModalConfirmIsOpen(false)}>Não</button>
-                </ModalConfirmButtons>
-              </ModalConfirmContainer>
-            </Modal>
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {filteredContact.map((obj, i) => (
+                <tr key={i}>
+                  <td data-label="Nome">{obj.name}</td>
+                  <td data-label="Email">{obj.email}</td>
+                  <td data-label="Telefone">{obj.phone}</td>
+                  <td data-label="Nascimento">{obj.birth_date ? formatedDate(obj.birth_date) : 'N/A'}</td>
+                  <td data-label="Cidade">{obj.city}</td>
+                  <td data-label="Editar">
+                    <button onClick={() => handleEditButton(obj, obj.id)}>
+                      <PencilSimpleLine size={26} color="#FFF" />
+                    </button>
+                  </td>
+                  <td data-label="Excluir">
+                    <button onClick={() => handleRemoveContact(obj.id)}>
+                      <Trash size={26} color="#FFF" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              <Modal
+                isOpen={modalConfirmIsOpen}
+                onRequestClose={() => setModalConfirmIsOpen(false)}
+                style={modalStyle}
+                ariaHideApp={false}
+              >
+                <ModalConfirmContainer>
+                  <h2>Você deseja mesmo excluir este contato?</h2>
+                  <ModalConfirmButtons>
+                    <button onClick={handleConfirmDelete}>Sim</button>
+                    <button onClick={() => setModalConfirmIsOpen(false)}>Não</button>
+                  </ModalConfirmButtons>
+                </ModalConfirmContainer>
+              </Modal>
+            </tbody>
+          </Table>
+        </ContainerTable>
       }
     </>
   )
