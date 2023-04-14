@@ -19,7 +19,7 @@ export function TableCompaniesData() {
 
   const filteredCompany = inputValue.length > 0 ?
     companies.filter(item => (
-      item[selectedOption as keyof CompanyModel].toLowerCase()
+      item[selectedOption as keyof CompanyModel].toString().toLowerCase()
         .includes(inputValue.toLowerCase()))
     ) : companies
 
