@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '../db';
-import { CompanyRow, UserRow } from '@/interfaces';
+import db from '../db';
+import { CompanyRow } from '@/interfaces';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   const method = req.method;
@@ -68,23 +68,3 @@ function createCompany(req: NextApiRequest, res: NextApiResponse) {
     }
   );
 }
-
-// function getUsersByCompanyID(req: NextApiRequest, res: NextApiResponse) {
-//   const companyId = req.params.id;
-
-//   db.all(
-//     `SELECT users.*
-//      FROM users
-//      INNER JOIN user_company ON users.id = user_company.user_id
-//      WHERE user_company.company_id = ?`,
-//     [companyId],
-//     (err, rows) => {
-//       if (err) {
-//         console.error(err);
-//         return res.status(500).send({ message: 'Erro ao consultar os dados.' });
-//       }
-
-//       res.send(rows);
-//     }
-//   );
-// }

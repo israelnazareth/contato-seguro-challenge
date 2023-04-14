@@ -16,7 +16,8 @@ export function ModalCompaniesData() {
   const {
     modalIsOpen, setModalIsOpen,
     companyObject, setCompanyObject,
-    users
+    users, fetchCompanies, fetchUsersAndCompanies,
+    companyID, usersCompanies, setCompanyID
   } = useMyContext()
 
   function handleClearFields() {
@@ -26,16 +27,32 @@ export function ModalCompaniesData() {
 
   function handleSubmit(data: CompanyModel) {
     const { id } = companyObject
+    const { users } = data;
+
+    const usersIds = users.map((user: any) => user.value)
 
     const validation = companyFormValidation(data, formRef)
     if (validation !== null) return;
 
     if (id > 0) {
-      updateCompany(id, data);
+      updateCompany(id, { ...data, users: usersIds });
       setModalIsOpen(false);
     } else if (id === 0) {
-      createCompany(data);
+      createCompany({ ...data, users: usersIds });
       setModalIsOpen(false);
+    }
+
+    fetchCompanies();
+    fetchUsersAndCompanies();
+  }
+
+  function getUsers(companyID: number) {
+    if (companyID > 0) {
+      const company = usersCompanies.filter((obj) => obj.company_id === companyID)
+      const userID = company.map((obj) => obj.user_id)
+      const usersData = users.filter((obj) => userID.includes(obj.id))
+      const usersOptions = usersData.map((obj) => ({ label: obj.name, value: obj.id }))
+      return usersOptions
     }
   }
 
@@ -80,6 +97,9 @@ export function ModalCompaniesData() {
           name='users'
           label='Usuários:'
           options={usersOptions()}
+          menuPortalTarget={document.body}
+          defaultValue={getUsers(companyID)}
+          menuPosition='fixed'
           isMulti
         />
         <ModalFormButtons>

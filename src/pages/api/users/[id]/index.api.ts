@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '../../db';
+import db from '../../db';
 import { UserModel } from '@/interfaces';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
@@ -75,6 +75,19 @@ function deleteUser(id: string, res: NextApiResponse) {
       res.status(500).json({ error: err.message } as any);
       return;
     }
+
+    db.run(
+      'DELETE FROM users_companies WHERE user_id = ?',
+      [id],
+      function (err) {
+        if (err) {
+          console.error(err.message);
+          return res.status(500).send('Erro ao remover relacionamentos antigos');
+        }
+
+        return res.status(200).json({ message: 'Company atualizada com sucesso' });
+      }
+    );
 
     if (this.changes === 0) {
       res.status(404).json({ error: `User with id=${id} not found` });

@@ -29,7 +29,7 @@ export async function deleteCompany(id: number) {
   await api.delete(`/${id}`);
 }
 
-export async function getCompaniesByUserID(id: number) {
+export async function getUsersByCompanyID(id: number) {
   const response = await api.get(`/${id}/users`);
   return response.data;
 }

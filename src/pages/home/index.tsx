@@ -17,12 +17,14 @@ export default function Home() {
     inputValue, setInputValue,
     setModalIsOpen, setSelectedOption,
     setContactObject, setCompanyObject,
+    setCompanyID
   } = useMyContext()
 
   function handleInsertNewContact() {
     setModalIsOpen(true);
     setContactObject(initialStateObj);
     setCompanyObject(initialStateObjCompany);
+    setCompanyID(0);
   }
 
   function handleTable() {

@@ -35,7 +35,8 @@ export function SelectUsers({ name, label, ...rest }: Props) {
 
         {error && <span style={{
           color: 'red',
-          fontSize: '0.875rem'
+          fontSize: '0.875rem',
+          fontWeight: 'bold'
         }}>{error}</span>}
       </label >
     </>

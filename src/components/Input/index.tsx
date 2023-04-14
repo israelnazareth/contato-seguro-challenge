@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useField } from '@unform/core'
 import ReactInputMask, { Props as InputProps } from 'react-input-mask'
-import { useMyContext } from '@/contexts/context'
 
 interface Props extends InputProps {
   name: string
@@ -43,7 +42,8 @@ export default function Input({ name, label, ...rest }: Props) {
 
           {error && <span style={{
             color: 'red',
-            fontSize: '0.875rem'
+            fontSize: '0.875rem',
+            fontWeight: 'bold'
           }}>{error}</span>}
         </label >
       }
