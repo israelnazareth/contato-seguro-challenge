@@ -17,12 +17,11 @@ export function TableContactData() {
     users, fetchUsers
   } = useMyContext()
 
-  const filteredContact = []
-  // inputValue.length > 0 ?
-  //   users.filter(item => (
-  //     item[selectedOption as keyof UserModel].toLowerCase()
-  //       .includes(inputValue.toLowerCase()))
-  //   ) : users
+  const filteredContact = inputValue.length > 0 ?
+    users.filter(item => (
+      item[selectedOption as keyof UserModel].toLowerCase()
+        .includes(inputValue.toLowerCase()))
+    ) : users
 
   function handleEditButton(obj: UserRow, id: number) {
     setModalIsOpen(true);
