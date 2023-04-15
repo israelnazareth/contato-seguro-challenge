@@ -69,7 +69,7 @@ export default function Home() {
                 <>
                   <option value="cnpj">CNPJ</option>
                   <option value="address">Endereço</option>
-                  <option value="users">Usuários</option>
+                  {/* <option value="users">Usuários</option> */}
                 </>
               }
             </select>
