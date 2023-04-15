@@ -2,6 +2,7 @@ describe('Home', () => {
   beforeEach(() => {
     cy.intercept('/api/users', { fixture: 'users' }).as('getUsers')
     cy.intercept('/api/companies', { fixture: 'companies' }).as('getCompanies')
+    cy.intercept('/api/users-companies', { fixture: 'users-companies' }).as('getUsersCompanies')
   });
 
   describe('Header', () => {
