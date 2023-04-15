@@ -2,7 +2,7 @@ import { UserModel } from '@/interfaces';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api/users',
+  baseURL: '/api/users',
 })
 
 export async function getUsers() {

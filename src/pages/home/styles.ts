@@ -23,7 +23,7 @@ export const Container = styled.div`
   padding: 1rem;
   border-radius: 8px;
   max-width: 90vw;
-  max-height: 95vh;
+  max-height: 90vh;
 `;
 
 export const Header = styled.header`

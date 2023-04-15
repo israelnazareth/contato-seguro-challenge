@@ -9,7 +9,9 @@ export const modalStyle = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: '35rem'
+    width: '35rem',
+    maxWidth: '85%',
+    maxHeight: '85%',
   },
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -62,6 +64,10 @@ export const PhoneAndBirthday = styled.div`
   
   label {
     width: 100%;
+  }
+
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
   }
 `;
 

@@ -2,7 +2,7 @@ import { CompanyModel } from '@/interfaces';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api/companies',
+  baseURL: '/api/companies',
 })
 
 export async function getCompanies() {
