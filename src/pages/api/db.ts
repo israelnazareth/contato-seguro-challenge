@@ -10,7 +10,7 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY,
       name TEXT,
-      email TEXT UNIQUE,
+      email TEXT,
       phone TEXT,
       birth_date TEXT,
       city TEXT
@@ -21,7 +21,7 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS companies (
       id INTEGER PRIMARY KEY,
       name TEXT,
-      cnpj TEXT UNIQUE,
+      cnpj TEXT,
       address TEXT
     )
   `);
