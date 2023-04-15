@@ -39,7 +39,7 @@ export default function Home() {
       <Main>
         <Container>
           <Header>
-            <Image src={logo} alt='' priority />
+            <Image data-test-id="logo" src={logo} alt='' priority />
             <div>
               <strong>Visualizar:</strong>
               <button type="button" onClick={handleTable}>
@@ -49,7 +49,7 @@ export default function Home() {
           </Header>
           <Fields>
             <button onClick={handleInsertNewContact}>
-              <Plus color="#FFF" size={26} weight="bold" />
+              <Plus data-test-id="insert-icon" color="#FFF" size={26} weight="bold" />
             </button>
             <input
               type="search"

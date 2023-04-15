@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Empresa A",
+    "cnpj": "12.345.678/9012-34",
+    "address": "Rua A"
+  },
+  {
+    "id": 2,
+    "name": "Empresa B",
+    "cnpj": "98.765.432/1234-56",
+    "address": "Rua B"
+  }
+]

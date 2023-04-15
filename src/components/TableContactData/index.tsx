@@ -72,7 +72,7 @@ export function TableContactData() {
                   <td data-label="Cidade">{obj.city}</td>
                   <td data-label="Editar">
                     <button onClick={() => handleEditButton(obj, obj.id)}>
-                      <PencilSimpleLine size={26} color="#FFF" />
+                      <PencilSimpleLine data-test-id='edit-icon' size={26} color="#FFF" />
                     </button>
                   </td>
                   <td data-label="Excluir">
