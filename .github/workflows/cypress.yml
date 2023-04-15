@@ -1,0 +1,30 @@
+name: Cypress Pull Request
+
+on:
+  pull_request:
+    types:
+      - synchronize
+      - opened
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run Cypress tests
+      run: npx cypress run
+
+    - name: Check Cypress test results
+      run: |
+        if [ -d "cypress/screenshots" ] && [ -n "$(ls -A cypress/screenshots)" ]; then
+          echo "Some Cypress tests have failed. Failing the build..."
+          exit 1
+        else
+          echo "All Cypress tests have passed."
+        fi
