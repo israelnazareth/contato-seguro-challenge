@@ -27,7 +27,7 @@ export default function Home() {
     setCompanyID(0);
   }
 
-  function handleTable() {
+  function handleTableChange() {
     table === 'users' ? setTable('companies') : setTable('users')
   }
 
@@ -39,17 +39,17 @@ export default function Home() {
       <Main>
         <Container>
           <Header>
-            <Image data-test-id="logo" src={logo} alt='' priority />
+            <Image data-testid="logo" src={logo} alt='' priority />
             <div>
               <strong>Visualizar:</strong>
-              <button type="button" onClick={handleTable}>
+              <button data-testid="buttonTableChange" type="button" onClick={handleTableChange}>
                 {table === 'users' ? 'Empresas' : 'Usuários'}
               </button>
             </div>
           </Header>
           <Fields>
             <button onClick={handleInsertNewContact}>
-              <Plus data-test-id="insert-icon" color="#FFF" size={26} weight="bold" />
+              <Plus data-testid="insert-icon" color="#FFF" size={26} weight="bold" />
             </button>
             <input
               type="search"
@@ -69,7 +69,6 @@ export default function Home() {
                 <>
                   <option value="cnpj">CNPJ</option>
                   <option value="address">Endereço</option>
-                  {/* <option value="users">Usuários</option> */}
                 </>
               }
             </select>

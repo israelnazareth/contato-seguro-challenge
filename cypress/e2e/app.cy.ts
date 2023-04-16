@@ -1,3 +1,6 @@
+import moment from 'moment';
+import users from '../fixtures/users.json';
+
 describe('Home', () => {
   beforeEach(() => {
     cy.intercept('/api/users', { fixture: 'users' }).as('getUsers')
@@ -8,7 +11,7 @@ describe('Home', () => {
   describe('Header', () => {
     it('should have a logo', () => {
       cy.visit('/');
-      cy.get('header img').should('be.visible').and('have.attr', 'data-test-id', 'logo');
+      cy.get('header img').should('be.visible').and('have.attr', 'data-testid', 'logo');
     });
 
     it('should have a strong tag', () => {
@@ -18,14 +21,14 @@ describe('Home', () => {
 
     it('should have a button', () => {
       cy.visit('/');
-      cy.get('header div button').should('be.visible').and('contain', 'Empresas' || 'Usuários');
+      cy.get('[data-testid="buttonTableChange"]').should('be.visible').and('contain', 'Empresas').and('prop', 'onclick').and('be.a', 'function', 'handleTableChange');
     });
   });
 
   describe('Fields', () => {
     it('should have a insert button', () => {
       cy.visit('/');
-      cy.get(`div button svg`).should('be.visible').and('have.attr', 'data-test-id', 'insert-icon');
+      cy.get(`div button svg`).should('be.visible').and('have.attr', 'data-testid', 'insert-icon');
     });
 
     it('should have a input search', () => {
@@ -52,7 +55,7 @@ describe('Home', () => {
 
     it('should have a caption', () => {
       cy.visit('/');
-      cy.get('table caption').should('be.visible').and('contain', 'Usuários' || 'Empresas');
+      cy.get('table caption').should('be.visible').and('contain', 'Usuários');
     });
 
     it('should have a thead', () => {
@@ -65,19 +68,39 @@ describe('Home', () => {
       cy.get('table tbody').should('be.visible');
     });
 
-    it('should have a tr', () => {
+    it('should have some tr', () => {
       cy.visit('/');
-      cy.get('table tbody tr').should('be.visible')
+      cy.get('tbody > tr').should('be.visible').should('have.length', users.length);
     });
 
-    it('should have some td', () => {
+    it('should have some td with correct values', () => {
       cy.visit('/');
-      cy.get('table tbody tr td').should('be.visible')
-    });
+      cy.get('tr > td').should('be.visible').and('have.length', 14);
 
-    it('should have a button on a td "Editar"', () => {
-      cy.visit('/');
-      cy.get('table tbody tr td button svg').should('be.visible').and('have.attr', 'data-test-id', 'edit-icon');
+      const columns = [
+        'Nome', 'Email', 'Telefone', 'Nascimento',
+        'Cidade', 'Editar', 'Excluir'
+      ];
+      const data = [
+        'name', 'email', 'phone',
+        'birth_date', 'city'
+      ];
+
+      columns.forEach((column, index) => {
+        const dataIndex = data[index];
+
+        cy.get(`td[data-label="${column}"]`).should('have.length', users.length).and('be.visible')
+
+        users.forEach((user) => {
+          if (column === 'Nascimento') {
+            cy.get(`td[data-label="${column}"]`).should('contain', moment(user[dataIndex as keyof typeof user]).format('DD/MM/YYYY'))
+          } else if (column === 'Editar' || column === 'Excluir') {
+            cy.get(`td[data-label="${column}"] button`).should('be.visible').and('prop', 'onclick').and('be.a', 'function', 'handleEditButton' || 'handleRemoveContact');
+          } else {
+            cy.get(`td[data-label="${column}"]`).should('contain', user[dataIndex as keyof typeof user])
+          }
+        });
+      });
     });
   })
 });
