@@ -121,6 +121,10 @@ http://localhost:3000
 
 -   A aplicação possui alguns testes implementados, para iniciá-los basta rodar o seguinte comando:
 ```bash
+npm run cypress
+```
+ou
+```bash
 npx cypress run
 ```
 <br>
