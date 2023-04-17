@@ -1,5 +1,4 @@
 import Modal from 'react-modal';
-import mockedCompanies from '@/data/companies.json';
 import { useMyContext } from "@/contexts/context";
 import { ContainerTable, ModalConfirmButtons, ModalConfirmContainer, Table, modalStyle } from "./styles";
 import { PencilSimpleLine, SmileyXEyes, Trash } from "@phosphor-icons/react";
