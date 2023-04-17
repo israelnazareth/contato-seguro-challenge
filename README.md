@@ -69,13 +69,13 @@
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85763987/232364406-d7b58e68-6ecb-42db-80b8-e854bc8cfb25.jpg"
-height=450 
+height=460 
 alt="Versão Mobile">
 <img src="https://user-images.githubusercontent.com/85763987/232364410-5da67ef7-17fa-4ff4-88e2-36da2547fe72.jpg"
-height=450 
+height=460 
 alt="Versão Mobile">
 <img src="https://user-images.githubusercontent.com/85763987/232364413-6b631816-4ef1-48a8-8dbe-052529640299.jpg"
-height=450
+height=460
 alt="Versão Mobile">
 
 <a id="-como-executar"></a>
