@@ -68,13 +68,13 @@
 ## :iphone: Resultado Aplicação Responsiva
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/85763987/232364406-d7b58e68-6ecb-42db-80b8-e854bc8cfb25.jpg"
+<img src="https://user-images.githubusercontent.com/85763987/232375227-164e4fde-6cc7-4e1c-abad-b4613bd475a2.jpg"
 height=480 
 alt="Versão Mobile">
-<img src="https://user-images.githubusercontent.com/85763987/232364410-5da67ef7-17fa-4ff4-88e2-36da2547fe72.jpg"
+<img src="https://user-images.githubusercontent.com/85763987/232375230-68b4a531-cd0c-4661-95ee-d26f47593ca6.jpg"
 height=480 
 alt="Versão Mobile">
-<img src="https://user-images.githubusercontent.com/85763987/232364413-6b631816-4ef1-48a8-8dbe-052529640299.jpg"
+<img src="https://user-images.githubusercontent.com/85763987/232375235-7c7eaaae-676b-4736-a58a-13e17f840413.jpg"
 height=480
 alt="Versão Mobile">
 
