@@ -1,38 +1,166 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Desafio Contato Seguro
 
-## Getting Started
+### Este foi um desafio proposto pela [Contato Seguro](https://www.contatoseguro.com.br/) que consistia em implementar uma lista de contatos. O projeto é dividido em Frontend e Backend.
 
-First, run the development server:
+<hr>
+
+<img src="https://user-images.githubusercontent.com/85763987/232362697-e72b753f-fa0c-4927-b39d-43c4c85f2272.jpg">
+
+<hr>
+
+<p align="center">
+  <a href="#-tecnologias-utilizadas">Tecnologias</a> -
+  <a href="#-resultado-aplicação-web">Resultado WEB</a> -
+  <a href="#-resultado-aplicação-mobile">Resultado MOBILE</a> -
+  <a href="#-como-executar">Como executar</a> -
+  <a href="#-contato">Contato</a>
+</p>
+
+<a id="-tecnologias-utilizadas"></a>
+
+## Tecnologias utilizadas
+
+<p align="center">
+  <a href= "https://html5.org/"><img alt="html 5 badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=E34F26&logo=HTML5&label=Markup Language&message=HTML5&color=E34F26"></a>
+  <a href= "https://developer.mozilla.org/pt-BR/docs/Web/CSS"><img alt="CSS 3 badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=1572B6&logo=CSS3&label=Style&message=CSS3&color=1572B6"></a>
+  <a href= "https://styled-components.com/"><img alt="Tailwind CSS badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=DB7093&logo=styled-components&label=Style&message=Styled%20Components%20&color=DB7093"></a>
+  <a href= "https://www.javascript.com/"><img alt="JavaScript badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=F7DF1E&logo=JavaScript&label=Language&message=JavaScript&color=F7DF1E"></a>
+  <a href= "https://www.typescriptlang.org/"><img alt="TypeScript badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=3178c6&logo=TypeScript&label=Language&message=TypeScript&color=3178c6"></a>
+  <a href= "https://babeljs.io/"><img alt="babeljs badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=f9dc3e&logo=Babel&label=Compiler Js&message=babeljs&color=f9dc3e"></a>
+  <a href= "https://nodejs.org/en/"><img alt="Node.js badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=339933&logo=Node.js&label=Runtime Environment&message=Node.js&color=3139933"></a>
+  <a href= "https://reactjs.org/"><img alt="React badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=61dafb&logo=React&label=Framework&message=React&color=61dafb"></a>
+  <a href= "https://vitejs.dev/"><img alt="React badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=646CFF&logo=vite&label=Build Tool&message=Vite&color=646CFF"></a>
+  <a href= "https://reactnative.dev/"><img alt="React Native badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=61dafb&logo=React&label=Framework&message=React Native&color=61dafb"></a>
+  <a href= "https://expo.dev/"><img alt="Expo badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=000020&logo=Expo&label=React tool&message=Expo&color=000020"></a>
+  <a href= "https://axios-http.com/"><img alt="Axios badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=5a29e4&logo=Axios&label=HTTP Client&message=Axios&color=5a29e4"></a>
+  <a href= "https://www.sqlite.org/index.html"><img alt="SQLite badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=47A248&logo=mongodb&label=Database&message=MongoDB&color=47A248"></a>
+  <a href= "https://www.docker.com/"><img alt="Docker badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=2496ED&logo=docker&label=Tool&message=Docker&color=2496ED"></a>
+  <a href= "https://www.figma.com/file/IBaKjqTi23ai3kkJ5XdMcN/Bol%C3%A3o-da-Copa-(Community)-(Copy)"><img alt="link projeto no figma" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=F24E1E&logo=Figma&label=Designer&message=Figma&color=F24E1E"></a>
+  <a href= "https://code.visualstudio.com/download"><img alt="vscode download" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=007ACC&logo=Visual Studio Code&label=IDE&message=Visual Studio Code&color=007ACC"></a>
+  <a href= "https://eslint.org/"><img alt="code formatter prettier" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=4B32C3&logo=ESLint&label=Code%20Formatter&message=ESLint&color=4B32C3"></a>
+</p>
+
+<p align="center">
+  <a href= "https://www.linkedin.com/in/israelnazareth/"><img alt="perfil israel nazareth" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=0A66C2&logo=LinkedIn&label=LinkedIn&message=Israel Nazareth&color=0A66C2"></a>
+  <a href= "https://instagram.com/raeldotjs"><img alt="perfil instagram israel nazareth" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=E4405F&logo=Instagram&label=Instagram&message=@raeldotjs&color=E4405F"></a>
+  
+  
+</p>
+
+<a id="-resultado-aplicação-web"></a>
+
+## :computer: Resultado Aplicação WEB
+
+<img src="https://user-images.githubusercontent.com/85763987/232363089-3064d81e-7001-48f3-aab3-dd5e57eb90a5.jpg">
+<hr>
+<img src="https://user-images.githubusercontent.com/85763987/232363092-93c1f1c7-d3a2-4fb7-858d-0cfad49bd7b9.jpg">
+<hr>
+<img src="https://user-images.githubusercontent.com/85763987/232363095-de185f2d-f4fa-4a67-bf87-f72360c1f943.jpg">
+<hr>
+<img src="https://user-images.githubusercontent.com/85763987/232363096-5bd958d4-3215-4e97-aa5a-e74d6fda0bbd.jpg">
+<hr>
+<img src="https://user-images.githubusercontent.com/85763987/232363097-ba6758d8-d0a5-4007-a511-14846e3d7664.jpg">
+<hr>
+<img src="https://user-images.githubusercontent.com/85763987/232363099-d2c5c2a0-6594-4991-853b-a09c76ba4ddb.jpg">
+<hr>
+
+<a id="-resultado-aplicação-mobile"></a>
+
+## :iphone: Resultado Aplicação Mobile
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/85763987/232364406-d7b58e68-6ecb-42db-80b8-e854bc8cfb25.jpg"
+height=600 
+alt="Versão Mobile">
+<img src="https://user-images.githubusercontent.com/85763987/232364410-5da67ef7-17fa-4ff4-88e2-36da2547fe72.jpg"
+height=600 
+alt="Versão Mobile">
+<img src="https://user-images.githubusercontent.com/85763987/232364413-6b631816-4ef1-48a8-8dbe-052529640299.jpg"
+height=600
+alt="Versão Mobile">
+
+<a id="-como-executar"></a>
+
+## :white_check_mark: Como executar
+
+Para executar a aplicação siga os procedimentos abaixo:
+
+### - Iniciando aplicação -
+
+-   Primeiro faça o clone do projeto:
+
+```bash
+git clone git@github.com:israelnazareth/contato-seguro-challenge.git
+```
+
+-   Entre no diretório:
+
+```bash
+cd contato-seguro-challenge
+```
+
+-   Depois instale as dependências do projeto:
+
+```bash
+npm install
+```
+ou
+```bash
+yarn
+```
+
+-   Agora inicie a aplicação:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```
+  
+-   A aplicação deve estar rodando na porta 3000:
+```bash
+http://localhost:3000
+```
+<br>
+ 
+### - Rotas do Backend -
+  
+As requisições do backend são realizadas a partir da rota principal ```/api``` e é possível utilizar os 4 principais métodos de requisição: ```GET```, ```POST```, ```UPDATE``` e ```DELETE```. O banco de dados tem relacionamento de ```n para n``` entre ```usuários``` e ```empresas```.
+
+-   Usuários:
+
+```bash
+/api/users
+```
+```bash
+/api/users/[id]
+```
+```bash
+/api/users/[id]/companies
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-   Empresas
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+/api/companies
+```
+```bash
+/api/companies/[id]
+```
+```bash
+/api/companies/[id]/users
+```
+  
+-   Rota de relacionamento:
+```bash
+/api/users-companies
+```
+<br>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+<a id="-contato"></a>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## :email: Contato
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Meu nome é Israel, sou desenvolvedor web formado pela [Trybe](https://www.betrybe.com/) sempre em busca de novos conhecimentos e impactar positivamente a vida das pessoas.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   Email: israelsnazareth@gmail.com
+-   Portfólio: [israelnazareth.github.io](https://israelnazareth.github.io/)
+-   LinkedIn: [Israel Nazareth](https://www.linkedin.com/in/israelnazareth/)
