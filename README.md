@@ -36,6 +36,7 @@
   <a href= "https://www.sqlite.org/index.html"><img alt="SQLite badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=003B57&logo=sqlite&label=Database&message=SQLite&color=003B57"></a>
   <a href= "https://code.visualstudio.com/download"><img alt="vscode download" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=007ACC&logo=Visual Studio Code&label=IDE&message=Visual Studio Code&color=007ACC"></a>
   <a href= "https://eslint.org/"><img alt="code formatter prettier" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=4B32C3&logo=ESLint&label=Code%20Formatter&message=ESLint&color=4B32C3"></a>
+  <a href= "https://www.cypress.io/"><img alt="cypress badge" src="https://img.shields.io/static/v1?logoWidth=15&logoColor=17202C&logo=cypress&label=E2E&message=Cypress&color=17202C"></a>
 </p>
 
 <p align="center">
@@ -116,6 +117,11 @@ npm run dev
 -   A aplicação deve estar rodando na porta 3000:
 ```bash
 http://localhost:3000
+```
+
+-   A aplicação possui alguns testes implementados, para iniciá-los basta rodar o seguinte comando:
+```bash
+npx cypress run
 ```
 <br>
  
